@@ -16,50 +16,17 @@
 	<header class="intro">
 		<p class="eyebrow">Ship it, get candy</p>
 		<h1>Requirements</h1>
-		<p>Everything your game needs before it counts. A small finished game beats a big unfinished one: only shipped games get candy.</p>
+		<p>Here's what your game needs to get candy.</p>
 	</header>
 
 	<section class="block">
 		<h2><i class="ph-bold ph-check-circle"></i>Your game must</h2>
 		<ul>
-			<li><strong>Start from the p5.js starter.</strong> Don't begin from a blank sketch: the core loop (spawn → click → score) must already run.</li>
-			<li><strong>Be playable end to end.</strong> A start screen, a play state, and a game-over screen, even if bare-bones.</li>
-			<li><strong>Be ghost or Halloween-themed.</strong> Ghosts, pumpkins, bats, haunted houses: anything spooky.</li>
-			<li><strong>Add 1-3 upgrades of your own.</strong> Movement, sound, lives, power-ups, a boss. Not ten, just a few that work.</li>
-			<li><strong>Credit your assets.</strong> Self-made, or linked from a free-use source in your README.</li>
+			<li>Be made with only p5.js!</li>
+			<li>Be playable through a demo link.</li>
+			<li>Be Halloween themed, with your own monster(s).</li>
+			<li>Doing it on your own? Track your time with <a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">Hackatime</a>.</li>
 		</ul>
-	</section>
-
-	<section class="block">
-		<h2><i class="ph-bold ph-scales"></i>Fair play</h2>
-		<ul>
-			<li>Talk with your neighbor, but don't paste their file. Two people submitting the same code both need to have built it.</li>
-			<li>AI is fine for unblocking a single line, not for writing your upgrade.</li>
-			<li>Sound and art from OpenGameArt, Kenney.nl, or Freesound: link the source.</li>
-		</ul>
-	</section>
-
-	<section class="block">
-		<h2><i class="ph-bold ph-upload-simple"></i>What to submit</h2>
-		<ul>
-			<li><strong>Playable link:</strong> the p5.js Web Editor share link, or a GitHub Pages URL.</li>
-			<li><strong>Source:</strong> the editor link already has it, or attach a repo.</li>
-			<li><strong>One GIF or ~20-second clip</strong> of the game being played.</li>
-			<li><strong>Two sentences:</strong> which upgrades you added, and why.</li>
-			<li><strong>Your name / Slack handle,</strong> so we know who to hand candy to.</li>
-		</ul>
-	</section>
-
-	<section class="block faq">
-		<h2><i class="ph-bold ph-question"></i>Quick answers</h2>
-		<dl>
-			<dt>What if I don't finish?</dt>
-			<dd>Ship what you've got. A working base game with zero upgrades still counts: the bar is a playable link, not a polished product.</dd>
-			<dt>Do I need to install anything?</dt>
-			<dd>No. Everything runs in the p5.js Web Editor in a browser tab.</dd>
-			<dt>Is there a deadline?</dt>
-			<dd>The end of the meeting. Submissions and candy happen live at the showcase.</dd>
-		</dl>
 	</section>
 
 	<div class="cta">
@@ -152,23 +119,8 @@
 		color: var(--parchment-dim);
 		line-height: 1.6;
 	}
-	strong {
-		color: var(--parchment);
-	}
-	dl {
-		margin: 0;
-	}
-	dt {
-		font-weight: 700;
-		margin-top: 12px;
-	}
-	dt:first-child {
-		margin-top: 0;
-	}
-	dd {
-		margin: 4px 0 0;
-		color: var(--parchment-dim);
-		line-height: 1.6;
+	ul a {
+		color: var(--pumpkin);
 	}
 	.cta {
 		display: flex;

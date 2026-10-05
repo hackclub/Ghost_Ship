@@ -3,32 +3,15 @@
 	import SiteFooter from '$lib/SiteFooter.svelte';
 	import { SUBMIT_URL } from '$lib/links.js';
 
-	// Escape code for {@html}, then dim `// comments`.
-	function hl(src) {
-		return src
-			.replace(/&/g, '&amp;')
-			.replace(/</g, '&lt;')
-			.replace(/>/g, '&gt;')
-			.replace(/(\/\/[^\n]*)/g, '<span class="c">$1</span>');
-	}
-
-	let copied = $state('');
-	async function copy(id, src) {
-		try {
-			await navigator.clipboard.writeText(src);
-			copied = id;
-			setTimeout(() => (copied = ''), 1500);
-		} catch {
-			// clipboard blocked: the code is still selectable by hand
-		}
-	}
+	// Which submit instructions step 9 shows.
+	let track = $state('workshop');
 
 	const setupCode = String.raw`function setup() {
-  createCanvas(480, 360); // make a 480 x 360 pixel canvas
+  createCanvas(400, 400); // make a 400 x 400 pixel canvas
 }
 
 function draw() {
-  background(15, 10, 25); // paint the whole canvas dark purple
+  background(220); // paint the whole canvas light gray
 }`;
 
 	const shapesCode = String.raw`function setup() {
@@ -286,16 +269,8 @@ for (let i = particles.length - 1; i >= 0; i--) {
 	];
 </script>
 
-{#snippet code(id, src, filename = 'sketch.js')}
-	<div class="code-block">
-		<div class="code-head">
-			<span>{filename}</span>
-			<button type="button" onclick={() => copy(id, src)}>
-				<i class="ph-bold {copied === id ? 'ph-check' : 'ph-copy'}"></i>{copied === id ? 'Copied' : 'Copy'}
-			</button>
-		</div>
-		<pre>{@html hl(src)}</pre>
-	</div>
+{#snippet code(id, src)}
+	<pre class="code-block">{src}</pre>
 {/snippet}
 
 <svelte:head>
@@ -341,17 +316,23 @@ for (let i = particles.length - 1; i >= 0; i--) {
 			<li><code>setup()</code> runs <b>once</b> when the sketch starts. Make the canvas here.</li>
 			<li><code>draw()</code> runs <b>again and again</b>, about 60 times a second. Each run is one frame, like a page in a flipbook.</li>
 		</ul>
-		<p>Open <a href="https://editor.p5js.org/" target="_blank" rel="noopener">editor.p5js.org</a>, delete the starter code, and paste this:</p>
+		<p>Open <a href="https://editor.p5js.org/" target="_blank" rel="noopener">editor.p5js.org</a>. It already starts you with this code:</p>
 		{@render code('setup', setupCode)}
-		<div class="note"><i class="ph-bold ph-play"></i><span>Press the ▶ Play button. You'll see a dark purple rectangle: that's your game screen.</span></div>
+		<p>Here's what each line does:</p>
+		<ul>
+			<li><code>createCanvas(400, 400)</code> makes the drawing area: 400 pixels wide, 400 pixels tall. It's in <code>setup()</code> because you only need one canvas.</li>
+			<li><code>background(220)</code> paints the whole canvas one color. With a single number, it's a shade of gray: <code>0</code> is black, <code>255</code> is white, so <code>220</code> is light gray. It's in <code>draw()</code> so every frame starts from a clean canvas.</li>
+		</ul>
+		<div class="note"><i class="ph-bold ph-play"></i><span>Press the ▶ Play button. You'll see a light gray square: that's your game screen.</span></div>
 		<div class="callout">
 			<h3>How positions work</h3>
-			<p>Every point on the canvas is an <b>(x, y)</b> pair. <code>(0, 0)</code> is the <b>top-left</b> corner. <b>x</b> grows to the right, <b>y</b> grows <b>downward</b>. On a 480 × 360 canvas, the middle is <code>(240, 180)</code>. Inside your sketch, <code>width</code> and <code>height</code> hold those sizes for you.</p>
+			<p>Every point on the canvas is an <b>(x, y)</b> pair. <code>(0, 0)</code> is the <b>top-left</b> corner. <b>x</b> grows to the right, <b>y</b> grows <b>downward</b>. On a 400 × 400 canvas, the middle is <code>(200, 200)</code>. Inside your sketch, <code>width</code> and <code>height</code> hold those sizes for you.</p>
 		</div>
 	</section>
 
 	<section class="step" id="draw">
 		<h2><span class="num">2</span>Draw shapes</h2>
+		<p>First, set up the game screen: change the canvas to <code>createCanvas(480, 360)</code> (wider, like a game) and the background to <code>background(15, 10, 25)</code> (dark purple, for a spooky night). The rest of the guide uses these values.</p>
 		<p>Drawing in p5.js works like painting: pick a color, then draw a shape with it. Shapes drawn later go on top.</p>
 		<ul>
 			<li><code>background(r, g, b)</code> fills the whole canvas. Calling it at the start of <code>draw()</code> wipes the last frame.</li>
@@ -435,11 +416,43 @@ for (let i = particles.length - 1; i >= 0; i--) {
 			<li><i class="ph-bold ph-check-square"></i>You added 1-3 upgrades of your own</li>
 			<li><i class="ph-bold ph-check-square"></i>You wrote it yourself: AI only to unblock a single line</li>
 		</ul>
-		<p>Read the <a href="/requirements/">full requirements</a> once more, then submit your share link.</p>
-		<div class="cta">
-			<a class="btn primary" href={SUBMIT_URL}><i class="ph-bold ph-rocket-launch"></i>Submit your game</a>
-			<a class="btn ghost" href="/requirements/"><i class="ph-bold ph-list-checks"></i>Requirements</a>
+		<p>Read the <a href="/requirements/">full requirements</a> once more. How you submit depends on how you're building:</p>
+		<div class="tabs" role="tablist">
+			<button type="button" role="tab" aria-selected={track === 'workshop'} class:active={track === 'workshop'} onclick={() => (track = 'workshop')}>
+				<i class="ph-bold ph-users-three"></i>At a workshop
+			</button>
+			<button type="button" role="tab" aria-selected={track === 'individual'} class:active={track === 'individual'} onclick={() => (track = 'individual')}>
+				<i class="ph-bold ph-user"></i>Individual
+			</button>
 		</div>
+
+		{#if track === 'workshop'}
+			<div class="panel" role="tabpanel">
+				<p>You need a free p5.js account so your game gets a link you can share.</p>
+				<ol class="howto">
+					<li>On <a href="https://editor.p5js.org/" target="_blank" rel="noopener">editor.p5js.org</a>, click <b>Sign up</b> in the top-right corner and make an account.</li>
+					<li>Build your game in the editor while you're logged in.</li>
+					<li>Click <b>File → Save</b> and give your sketch a name.</li>
+					<li>Click <b>File → Share</b> and copy the <b>Edit</b> link. It shows your code and lets anyone press ▶ to play.</li>
+					<li>Paste the link into your club's submission form, or send it to your club leader.</li>
+				</ol>
+			</div>
+		{:else}
+			<div class="panel" role="tabpanel">
+				<p>Building on your own? You have to track your coding time with <a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">Hackatime</a>. It only tracks code editors like VS Code, not the p5.js web editor, so build your game in VS Code.</p>
+				<ol class="howto">
+					<li>Go to <a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">hackatime.hackclub.com</a>, sign in, and follow the setup steps for VS Code.</li>
+					<li>In VS Code, install the <b>p5.vscode</b> extension, then run <b>Create p5.js Project</b> from the command palette (<code>Ctrl+Shift+P</code>).</li>
+					<li>Install the <b>Live Server</b> extension and click <b>Go Live</b> to play your game in the browser. Hackatime logs your time while you code.</li>
+					<li>When you're done, make a free account on <a href="https://editor.p5js.org/" target="_blank" rel="noopener">editor.p5js.org</a>, paste in your <code>sketch.js</code>, then <b>File → Save</b> and <b>File → Share</b> to get your game's link.</li>
+					<li>Submit that link using the button below.</li>
+				</ol>
+				<div class="cta">
+					<a class="btn primary" href={SUBMIT_URL}><i class="ph-bold ph-rocket-launch"></i>Submit your game</a>
+					<a class="btn ghost" href="https://hackatime.hackclub.com" target="_blank" rel="noopener"><i class="ph-bold ph-clock"></i>Set up Hackatime</a>
+				</div>
+			</div>
+		{/if}
 	</section>
 </main>
 
@@ -609,48 +622,13 @@ for (let i = particles.length - 1; i >= 0; i--) {
 
 	.code-block {
 		margin: 14px 0;
-		border: 1px solid var(--panel-line);
-		border-radius: 10px;
-		overflow: hidden;
-		background: var(--code-bg);
-	}
-	.code-head {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 6px 8px 6px 14px;
-		border-bottom: 1px solid var(--panel-line);
-		font-family: var(--font-mono);
-		font-size: 12px;
-		color: var(--parchment-dim);
-	}
-	.code-head button {
-		display: inline-flex;
-		align-items: center;
-		gap: 6px;
-		font: inherit;
-		color: var(--parchment);
-		background: var(--panel);
-		border: 1px solid var(--panel-line);
-		border-radius: 6px;
-		padding: 4px 10px;
-		cursor: pointer;
-	}
-	.code-head button:hover {
-		border-color: var(--pumpkin);
-		color: var(--pumpkin);
-	}
-	pre {
-		margin: 0;
 		padding: 14px 16px;
 		overflow-x: auto;
+		background: #000;
+		color: #fff;
 		font-family: var(--font-mono);
 		font-size: 13.5px;
 		line-height: 1.6;
-		color: var(--parchment);
-	}
-	pre :global(.c) {
-		color: #8f86a3;
 	}
 
 	.note,
@@ -765,6 +743,52 @@ for (let i = particles.length - 1; i >= 0; i--) {
 	.btn.ghost:hover {
 		border-color: var(--pumpkin);
 		color: var(--pumpkin);
+	}
+
+	.tabs {
+		display: flex;
+		gap: 8px;
+		flex-wrap: wrap;
+		margin: 16px 0 0;
+	}
+	.tabs button {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		font: inherit;
+		font-size: 15px;
+		font-weight: 700;
+		padding: 10px 18px;
+		border-radius: 999px;
+		border: 2px solid var(--panel-line);
+		background: transparent;
+		color: var(--parchment);
+		cursor: pointer;
+	}
+	.tabs button:hover {
+		border-color: var(--pumpkin);
+		color: var(--pumpkin);
+	}
+	.tabs button.active {
+		background: var(--pumpkin);
+		border-color: var(--pumpkin);
+		color: #241505;
+	}
+	.panel {
+		margin-top: 14px;
+		border: 1px solid var(--panel-line);
+		border-radius: 10px;
+		padding: 16px 18px;
+	}
+	.howto {
+		margin: 0 0 14px;
+		padding-left: 22px;
+		color: var(--parchment-dim);
+		display: grid;
+		gap: 8px;
+	}
+	.howto b {
+		color: var(--parchment);
 	}
 
 	@media (max-width: 600px) {

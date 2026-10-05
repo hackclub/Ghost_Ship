@@ -58,7 +58,7 @@
 		position: absolute;
 		top: 0;
 		right: 0;
-		width: clamp(180px, 22vw, 300px);
+		width: 22%;
 		height: auto;
 		pointer-events: none;
 		z-index: 0;
