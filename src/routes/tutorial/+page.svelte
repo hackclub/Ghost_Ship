@@ -283,7 +283,6 @@ for (let i = particles.length - 1; i >= 0; i--) {
 
 <main>
 	<header class="intro">
-		<p class="eyebrow">Guide</p>
 		<h1>Get started with p5.js</h1>
 		<p class="lead">This guide assumes you've never used p5.js. You'll learn how drawing works, draw your own ghost, make it move, and finish with <a href="/play/">Ghost Hunt</a>: the same base game everyone starts from.</p>
 		<div class="facts">
@@ -508,14 +507,6 @@ for (let i = particles.length - 1; i >= 0; i--) {
 
 	.intro {
 		margin-bottom: 24px;
-	}
-	.eyebrow {
-		margin: 0 0 8px;
-		color: var(--mint);
-		font-size: 13px;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
 	}
 	h1 {
 		font-family: var(--font-display);

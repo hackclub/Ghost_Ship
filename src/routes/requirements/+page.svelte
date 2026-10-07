@@ -1,7 +1,6 @@
 <script>
 	import SiteHeader from '$lib/SiteHeader.svelte';
 	import SiteFooter from '$lib/SiteFooter.svelte';
-	import { SUBMIT_URL } from '$lib/links.js';
 </script>
 
 <svelte:head>
@@ -14,7 +13,6 @@
 
 <main>
 	<header class="intro">
-		<p class="eyebrow">Ship it, get candy</p>
 		<h1>Requirements</h1>
 		<p>Here's what your game needs to get candy.</p>
 	</header>
@@ -29,9 +27,30 @@
 		</ul>
 	</section>
 
+	<section class="block bonus">
+		<h2><i class="ph-bold ph-star"></i>Bonus challenges</h2>
+		<p class="sub">Optional. Finish them on top of the requirements above to earn extra rewards.</p>
+		<div class="bonus-grid">
+			<article class="bonus-card">
+				<span class="tag">Bonus 1</span>
+				<h3><i class="ph-bold ph-paint-brush"></i>Custom art &amp; sound</h3>
+				<p>Give your effects your own art, add your own sound effects, or both. For example: a burst you drew when a ghost is caught, or a "boo" you recorded yourself.</p>
+			</article>
+			<article class="bonus-card">
+				<span class="tag">Bonus 2</span>
+				<h3><i class="ph-bold ph-stairs"></i>Two more levels</h3>
+				<p>Add two extra levels, each harder than the last. Make the ghost faster, give less time, add more ghosts, or throw in something new to dodge.</p>
+			</article>
+		</div>
+		<div class="rewards">
+			<div class="reward"><i class="ph-bold ph-sticker"></i><span><b>Finish 1 bonus:</b> a sticker sheet</span></div>
+			<div class="reward"><i class="ph-bold ph-gift"></i><span><b>Finish both:</b> the sticker sheet + another $5 for candy</span></div>
+		</div>
+	</section>
+
 	<div class="cta">
 		<a class="btn primary" href="/tutorial/"><i class="ph-bold ph-book-open"></i>Start the guide</a>
-		<a class="btn ghost" href={SUBMIT_URL}><i class="ph-bold ph-rocket-launch"></i>Submit your game</a>
+		<a class="btn ghost" href="/submit/"><i class="ph-bold ph-rocket-launch"></i>Submit your game</a>
 	</div>
 </main>
 
@@ -71,14 +90,6 @@
 	}
 	.intro {
 		margin-bottom: 28px;
-	}
-	.eyebrow {
-		margin: 0 0 8px;
-		color: var(--mint);
-		font-size: 13px;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
 	}
 	h1 {
 		font-family: var(--font-display);
@@ -121,6 +132,69 @@
 	}
 	ul a {
 		color: var(--pumpkin);
+	}
+	.sub {
+		margin: 0 0 16px;
+		color: var(--parchment-dim);
+		line-height: 1.6;
+	}
+	.bonus-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 12px;
+	}
+	.bonus-card {
+		border: 1px solid var(--panel-line);
+		border-radius: 10px;
+		padding: 16px 18px;
+		background: var(--night);
+	}
+	.bonus-card .tag {
+		display: inline-block;
+		font-size: 12px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--mint);
+		margin-bottom: 6px;
+	}
+	.bonus-card h3 {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin: 0 0 8px;
+		font-size: 1.1rem;
+	}
+	.bonus-card h3 i {
+		color: var(--pumpkin);
+	}
+	.bonus-card p {
+		margin: 0;
+		color: var(--parchment-dim);
+		line-height: 1.6;
+	}
+	.rewards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 12px;
+		margin-top: 12px;
+	}
+	.reward {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding: 12px 16px;
+		border: 1px dashed var(--pumpkin);
+		border-radius: 10px;
+		color: var(--parchment-dim);
+		line-height: 1.5;
+	}
+	.reward i {
+		color: var(--pumpkin);
+		font-size: 1.3rem;
+	}
+	.reward b {
+		color: var(--parchment);
 	}
 	.cta {
 		display: flex;

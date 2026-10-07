@@ -1,14 +1,12 @@
 <script>
-	import { SUBMIT_URL } from '$lib/links.js';
-
 	let { current = '' } = $props();
 
 	const tabs = [
 		{ id: 'guide', label: 'Guide', href: '/tutorial/', icon: 'ph-book-open' },
 		{ id: 'requirements', label: 'Requirements', href: '/requirements/', icon: 'ph-list-checks' },
 		{ id: 'workshop', label: 'Run a Workshop', href: '/jam/', icon: 'ph-users-three' },
-		{ id: 'submit', label: 'Individual Submissions', href: SUBMIT_URL, icon: 'ph-rocket-launch' },
-		{ id: 'faq', label: 'FAQ', href: '/#faq', icon: 'ph-question' }
+		{ id: 'submit', label: 'Submit', href: '/submit/', icon: 'ph-rocket-launch' },
+		{ id: 'faq', label: 'FAQ', href: '/faq/', icon: 'ph-question' }
 	];
 </script>
 

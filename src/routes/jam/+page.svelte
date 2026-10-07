@@ -14,10 +14,6 @@
 	</div>
 
 	<header class="masthead">
-		<div class="eyebrow">
-			<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7 2 4 6 4 11v9.2c0 .7.8 1.1 1.4.7l1.9-1.4 1.8 1.6c.5.4 1.2.4 1.7 0l1.7-1.5 1.7 1.5c.5.4 1.2.4 1.7 0l1.8-1.6 1.9 1.4c.6.4 1.4 0 1.4-.7V11c0-5-3-9-8-9zm-3 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm6 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
-			Hack Club · Mini YSWS Build Night
-		</div>
 		<h1 class="title">Ghost Ship</h1>
 		<p class="tagline">One club meeting. One haunted canvas. Everyone leaves with a game where you click the ghosts before the clock runs out. Beginners finish it; everyone else breaks it in new directions.</p>
 
@@ -300,19 +296,6 @@
 		padding-bottom: 28px;
 		margin-bottom: 36px;
 		border-bottom: 1px solid var(--line);
-	}
-	.eyebrow {
-		font-family: var(--font-body);
-		font-size: 12px;
-		letter-spacing: 0.09em;
-		text-transform: uppercase;
-		color: var(--accent2);
-		display: flex;
-		align-items: center;
-		gap: 9px;
-	}
-	.eyebrow svg {
-		flex: none;
 	}
 	h1.title {
 		font-size: clamp(2.4rem, 6vw, 3.6rem);
