@@ -383,7 +383,7 @@
 
 <div class="wrap">
 	<div class="topbar">
-		<a class="back" href="/">← Ghost Ship kit</a>
+		<a class="back" href="/">← Home</a>
 		<a class="flag-link" href="https://hackclub.com" target="_blank" rel="noopener">
 			<img src="/media/flag-orpheus-pumpkin.svg" alt="Hack Club" />
 		</a>

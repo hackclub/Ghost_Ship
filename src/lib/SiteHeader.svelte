@@ -1,12 +1,14 @@
 <script>
 	let { current = '' } = $props();
 
-	const tabs = [
+	const home = { id: 'home', label: 'Home', href: '/', icon: 'ph-house' };
+	const links = [
 		{ id: 'guide', label: 'Guide', href: '/tutorial/', icon: 'ph-book-open' },
 		{ id: 'requirements', label: 'Requirements', href: '/requirements/', icon: 'ph-list-checks' },
 		{ id: 'submit', label: 'Submit', href: '/submit/', icon: 'ph-rocket-launch' },
 		{ id: 'faq', label: 'FAQ', href: '/faq/', icon: 'ph-question' }
 	];
+	const tabs = [home, ...links];
 </script>
 
 <header class="site">

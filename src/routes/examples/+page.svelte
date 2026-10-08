@@ -4,16 +4,16 @@
 
 	const examples = [
 		{
-			title: 'Ghost Hunt',
+			title: 'Mini Ghost Demo',
 			href: '/play/',
 			icon: 'ph-ghost',
-			desc: 'The base game from the guide. Click the ghost as many times as you can before the 30-second timer runs out.'
+			desc: 'Just steps 2-8 of the guide, put together: click the ghost before the 30-second timer runs out.'
 		},
 		{
-			title: 'Ghost Hunt: full demo',
+			title: 'Expanded Demo',
 			href: '/demo/',
 			icon: 'ph-sparkle',
-			desc: 'A bigger version with pumpkins, candy, and bats, 3 lives, sound effects, particle bursts, and a high score.'
+			desc: 'The mini demo with extra parts added: pumpkins, candy, bats, 3 lives, sound effects, and a high score.'
 		}
 	];
 </script>

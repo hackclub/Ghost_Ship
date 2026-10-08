@@ -21,23 +21,23 @@
 		},
 		{
 			q: 'Do I need a club to take part?',
-			a: 'No. Build it on your own and send it in as an <a href="/submit/">individual submission</a>, or <a href="/jam/">run a workshop</a> at your club.'
+			a: 'Nope! Build it on your own and send it in as an <a href="/submit/">individual submission</a>, or <a href="/jam/">run a workshop</a> at your club.'
 		},
 		{
 			q: 'Do I need to install anything?',
-			a: 'No. Everything runs in the <a href="https://editor.p5js.org/" target="_blank" rel="noopener">p5.js Web Editor</a> in your browser.'
+			a: 'Nope, everything runs in the <a href="https://editor.p5js.org/" target="_blank" rel="noopener">p5.js Web Editor</a> in your browser.'
 		},
 		{
 			q: 'Can I use AI?',
-			a: "For unblocking a single line, sure. Not for writing your game or your upgrades: the point is that you built the thing you're showing off."
+			a: "For unblocking a single line, sure, but not for writing your game or your upgrades, because the point is that you built the thing you're showing off."
 		},
 		{
 			q: 'How do I get candy?',
-			a: "At a club meeting, your club leader hands it out at the showcase. On your own, submit your game and we'll get you candy once it's reviewed."
+			a: "At a club meeting, your club leader hands it out at the showcase, and on your own, we'll get you candy once your submitted game is reviewed."
 		},
 		{
 			q: 'Can I earn more than candy?',
-			a: 'Yes. Finish one <a href="/requirements/">bonus challenge</a> for a sticker sheet, or both for the sticker sheet and another $5 for candy.'
+			a: 'Yes. Finish one <a href="/requirements/">bonus challenge</a> for a sticker sheet, or both for the sticker sheet and $10 total for candy.'
 		},
 		{
 			q: 'Is it safe? What if my parents have questions?',

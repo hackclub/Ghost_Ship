@@ -61,6 +61,7 @@ export const creature = (p) => {
 	};
 	p.draw = () => {
 		p.background(...NIGHT);
+		p.scale(2);
 		drawGhost(p, 240, 180);
 		drawGhost(p, 100, 80);
 	};
@@ -240,30 +241,3 @@ function game(extra = {}) {
 
 export const full = game();
 
-export const toolbox = {
-	'Haunted wobble': game({ wobble: true }),
-	'Floating movement': game({ bounce: true }),
-	'See-through ghost': game({ fade: true }),
-	'Get harder over time': game({ ramp: true }),
-	'Particle burst on a hit': game({ burst: true }),
-	'Draw a pumpkin': (p) => {
-		p.setup = () => {
-			p.createCanvas(480, 360);
-			p.noLoop();
-		};
-		p.draw = () => {
-			p.background(...NIGHT);
-			p.translate(240, 190);
-			p.scale(2.5);
-			p.noStroke();
-			p.fill(255, 140, 40);
-			p.ellipse(0, 0, 64, 52);
-			p.fill(60, 140, 60);
-			p.rect(-4, -34, 8, 12);
-			p.fill(30);
-			p.triangle(-16, -4, -8, -12, -2, -4);
-			p.triangle(2, -4, 8, -12, 16, -4);
-			p.rect(-12, 8, 24, 5);
-		};
-	}
-};

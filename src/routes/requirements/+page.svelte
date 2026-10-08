@@ -1,6 +1,7 @@
 <script>
 	import SiteHeader from '$lib/SiteHeader.svelte';
 	import SiteFooter from '$lib/SiteFooter.svelte';
+	import StickerSheet from '$lib/StickerSheet.svelte';
 </script>
 
 <svelte:head>
@@ -14,7 +15,7 @@
 <main>
 	<header class="intro">
 		<h1>Requirements</h1>
-		<p>Here's what your game needs to get candy. The base game takes about 1 hour.</p>
+		<p>Here's what your game needs to get candy, and the base game takes about 1 hour.</p>
 	</header>
 
 	<section class="block">
@@ -23,29 +24,29 @@
 			<li>Be made with only p5.js!</li>
 			<li>Be playable through a demo link.</li>
 			<li>Be Halloween themed, with your own monster(s).</li>
-			<li>Doing it on your own? Track your time with <a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">Hackatime</a>, put your code in a public GitHub repo, and deploy it with GitHub Pages. The <a href="/tutorial/">guide</a> shows how.</li>
+			<li>Look like your own, not a copy of the guide, with your own creature design, colors, and style (the <a href="/tutorial/">guide</a> has ideas).</li>
+			<li>Individual submission? Track your time with <a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">Hackatime</a> or <a href="https://lapse.hackclub.com" target="_blank" rel="noopener">Lapse</a>.</li>
 		</ul>
 	</section>
 
 	<section class="block bonus">
 		<h2><i class="ph-bold ph-star"></i>Bonus challenges</h2>
-		<p class="sub">Optional. Finish them on top of the requirements above to earn extra rewards. Each one takes about 3-5 hours.</p>
+		<p class="sub">While these are optional challenges, if you complete them you can get extra prizes!</p>
 		<div class="bonus-grid">
 			<article class="bonus-card">
-				<span class="tag">Bonus 1 · 3-5 hours</span>
 				<h3><i class="ph-bold ph-paint-brush"></i>Custom art &amp; sound</h3>
-				<p>Give your effects your own art, add your own sound effects, or both. For example: a burst you drew when a ghost is caught, or a "boo" you recorded yourself.</p>
+				<p>Give your effects your own art, add your own sound effects, or both, like a burst you drew for when a ghost is caught or a "boo" you recorded yourself.</p>
 			</article>
 			<article class="bonus-card">
-				<span class="tag">Bonus 2 · 3-5 hours</span>
 				<h3><i class="ph-bold ph-stairs"></i>Two more levels</h3>
-				<p>Add two extra levels, each harder than the last. Make the ghost faster, give less time, add more ghosts, or throw in something new to dodge.</p>
+				<p>Add two extra levels that each get harder than the last, by making the ghost faster, giving less time, adding more ghosts, or throwing in something new to dodge.</p>
 			</article>
 		</div>
 		<div class="rewards">
-			<div class="reward"><i class="ph-bold ph-sticker"></i><span><b>Finish 1 bonus:</b> a sticker sheet</span></div>
-			<div class="reward"><i class="ph-bold ph-gift"></i><span><b>Finish both:</b> the sticker sheet + another $5 for candy</span></div>
+			<div class="reward"><i class="ph-bold ph-sticker"></i><StickerSheet /></div>
+			<div class="reward"><i class="ph-bold ph-gift"></i><span><b>Finish both:</b> the sticker sheet and $10 total for candy!</span></div>
 		</div>
+		<p class="more"><a href="/bonus/">See the bonus page</a> for hints, docs, and tools for each challenge.</p>
 	</section>
 
 	<div class="cta">
@@ -195,6 +196,14 @@
 	}
 	.reward b {
 		color: var(--parchment);
+	}
+	.more {
+		margin: 14px 0 0;
+		color: var(--parchment-dim);
+	}
+	.more a {
+		color: var(--pumpkin);
+		font-weight: 700;
 	}
 	.cta {
 		display: flex;

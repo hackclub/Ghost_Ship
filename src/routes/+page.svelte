@@ -10,7 +10,7 @@
 
 <div class="page">
 
-<SiteHeader />
+<SiteHeader current="home" />
 
 <main>
 	<section class="hero">
@@ -18,9 +18,8 @@
 			<img src="/media/IMG_0398.png" alt="Ghost Ship ghost sticker" />
 		</div>
 		<div class="hero-copy">
-			<p class="eyebrow">A Hack Club clubs event!</p>
 			<h1>Build a <span class="word">sp<span class="orbit"><span class="haunt" style="--i: 0">o</span><span class="haunt" style="--i: 1">o</span><span class="haunt" style="--i: 2">o</span><span class="haunt" style="--i: 3">o</span><span class="haunt" style="--i: 4">o</span><span class="haunt" style="--i: 5">o</span><span class="haunt" style="--i: 6">o</span><span class="haunt" style="--i: 7">o</span></span>ky</span> game.<br />Get <span class="highlight">candy!</span></h1>
-			<p class="intro">Make a Halloween-themed game in p5.js. Whether it's by yourself or in a club meeting, complete the guide and submit it to get $5 of Halloween candy!</p>
+			<p class="intro">Make a Halloween-themed game in p5.js. Whether it's by yourself or in a club meeting, complete the guide and submit it to get candy for Halloween, along with a sticker sheet!</p>
 			<div class="cta">
 				<a class="btn primary" href="/tutorial/"><i class="ph-bold ph-book-open"></i>Guide</a>
 				<a class="btn ghost" href={SUBMIT_URL}><i class="ph-bold ph-rocket-launch"></i>Individual Submissions</a>
@@ -112,14 +111,6 @@
 	}
 	.hero-copy {
 		max-width: 620px;
-	}
-	.eyebrow {
-		margin: 0 0 10px;
-		color: var(--mint);
-		font-size: 13px;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
 	}
 	h1 {
 		isolation: isolate;

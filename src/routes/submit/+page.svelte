@@ -15,20 +15,20 @@
 <main>
 	<header class="intro">
 		<h1>Submit your game</h1>
-		<p>Pick the form that matches how you built it. Check the <a href="/requirements/">requirements</a> first.</p>
+		<p>Check the <a href="/requirements/">requirements</a> first, then pick the form that matches how you built your game.</p>
 	</header>
 
 	<div class="choices">
 		<a class="choice" href={SUBMIT_URL}>
 			<i class="ph-bold ph-user"></i>
 			<h2>Individual</h2>
-			<p>You built your game on your own. Include your demo link and your Hackatime time.</p>
+			<p>You built your game on your own, so include your demo link and your tracked time.</p>
 			<span class="go">Individual form<i class="ph-bold ph-arrow-right"></i></span>
 		</a>
 		<a class="choice" href={WORKSHOP_SUBMIT_URL}>
 			<i class="ph-bold ph-users-three"></i>
 			<h2>Workshop</h2>
-			<p>You built your game at a club meeting. Club leaders can send in everyone's games together.</p>
+			<p>You built your game at a club meeting, and your club leader can send in everyone's games together.</p>
 			<span class="go">Workshop form<i class="ph-bold ph-arrow-right"></i></span>
 		</a>
 	</div>
