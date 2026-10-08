@@ -9,7 +9,7 @@
 	<div class="topbar">
 		<a class="hub-back" href="/">← Ghost Ship kit</a>
 		<a class="flag-link" href="https://hackclub.com" target="_blank" rel="noopener">
-			<img src="/media/flag-orpheus-toffee.svg" alt="Hack Club" />
+			<img src="/media/flag-orpheus-pumpkin.svg" alt="Hack Club" />
 		</a>
 	</div>
 

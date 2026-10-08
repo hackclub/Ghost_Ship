@@ -22,8 +22,8 @@
 			<h1>Build a <span class="word">sp<span class="orbit"><span class="haunt" style="--i: 0">o</span><span class="haunt" style="--i: 1">o</span><span class="haunt" style="--i: 2">o</span><span class="haunt" style="--i: 3">o</span><span class="haunt" style="--i: 4">o</span><span class="haunt" style="--i: 5">o</span><span class="haunt" style="--i: 6">o</span><span class="haunt" style="--i: 7">o</span></span>ky</span> game.<br />Get <span class="highlight">candy!</span></h1>
 			<p class="intro">Make a Halloween-themed game in p5.js. Whether it's by yourself or in a club meeting, complete the guide and submit it to get $5 of Halloween candy!</p>
 			<div class="cta">
-				<a class="btn ghost" href="/tutorial/"><i class="ph-bold ph-book-open"></i>Guide</a>
-				<a class="btn primary" href={SUBMIT_URL}><i class="ph-bold ph-rocket-launch"></i>Individual Submissions</a>
+				<a class="btn primary" href="/tutorial/"><i class="ph-bold ph-book-open"></i>Guide</a>
+				<a class="btn ghost" href={SUBMIT_URL}><i class="ph-bold ph-rocket-launch"></i>Individual Submissions</a>
 				<a class="btn ghost" href="/jam/"><i class="ph-bold ph-users-three"></i>Run a Workshop</a>
 			</div>
 		</div>
@@ -32,12 +32,18 @@
 	<section class="reqs" id="requirements">
 		<h2>Requirements</h2>
 		<ul>
-			<li><i class="ph-bold ph-git-fork"></i>Start from the p5.js starter, not a blank sketch.</li>
-			<li><i class="ph-bold ph-game-controller"></i>Playable end to end: start screen, play, game over.</li>
-			<li><i class="ph-bold ph-ghost"></i>Ghost or Halloween-themed, with 1-3 upgrades of your own.</li>
-			<li><i class="ph-bold ph-link"></i>Submit a working share link before the showcase.</li>
+			<li><i class="ph-bold ph-code"></i>Use p5.js, either in the web editor or in VS Code.</li>
+			<li><i class="ph-bold ph-game-controller"></i>A full playable game!</li>
+			<li><i class="ph-bold ph-ghost"></i>Halloween themed: think of some spooky creatures!</li>
+			<li><i class="ph-bold ph-link"></i>Submit a playable link: the p5.js web editor at a workshop, or GitHub Pages on your own.</li>
 		</ul>
 		<a class="btn primary" href="/requirements/"><i class="ph-bold ph-list-checks"></i>Full requirements</a>
+	</section>
+
+	<section class="reqs examples">
+		<h2>Examples</h2>
+		<p>Not sure where to start? Play a couple of finished Ghost Ship games to get ideas.</p>
+		<a class="btn primary" href="/examples/"><i class="ph-bold ph-game-controller"></i>See examples</a>
 	</section>
 </main>
 
@@ -327,6 +333,11 @@
 		padding: 0;
 		display: grid;
 		gap: 10px;
+	}
+	.examples p {
+		margin: 0 0 16px;
+		color: var(--parchment-dim);
+		line-height: 1.6;
 	}
 	.reqs li {
 		display: flex;

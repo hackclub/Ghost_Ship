@@ -2,120 +2,195 @@
 	import SiteHeader from '$lib/SiteHeader.svelte';
 	import SiteFooter from '$lib/SiteFooter.svelte';
 	import { SUBMIT_URL } from '$lib/links.js';
+	import Preview from '$lib/Preview.svelte';
+	import * as previews from '$lib/previews.js';
 
-	// Which submit instructions step 9 shows.
 	let track = $state('workshop');
 
-	const setupCode = String.raw`function setup() {
-  createCanvas(400, 400); // make a 400 x 400 pixel canvas
+	const indexCode = [
+		{
+			src: String.raw`<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ghost Hunt</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1/lib/p5.min.js">${"<"}/script>
+  </head>
+  <body>
+    <script src="sketch.js">${"<"}/script>
+  </body>
+</html>`
+		}
+	];
+
+	const setupCode = [
+		{
+			src: String.raw`function setup() {
+  createCanvas(400, 400);
 }
 
 function draw() {
-  background(220); // paint the whole canvas light gray
-}`;
+  background(220);
+}`
+		}
+	];
 
-	const shapesCode = String.raw`function setup() {
+	const shapesCode = [
+		{
+			say: 'In setup(), make the canvas game-sized:',
+			src: String.raw`function setup() {
   createCanvas(480, 360);
-}
+}`
+		},
+		{
+			say: 'In draw(), paint the night sky and turn off outlines:',
+			src: String.raw`background(15, 10, 25);
+noStroke();`
+		},
+		{
+			say: 'Below that, a pale yellow moon. The numbers are x, y, width, height:',
+			src: String.raw`fill(255, 240, 200);
+ellipse(400, 60, 50, 50);`
+		},
+		{
+			say: 'Then dark purple ground along the bottom:',
+			src: String.raw`fill(40, 30, 50);
+rect(0, 300, 480, 60);`
+		}
+	];
 
-function draw() {
-  background(15, 10, 25);
-
-  noStroke();                // no outlines on the shapes below
-
-  fill(255, 240, 200);       // pale yellow
-  ellipse(400, 60, 50, 50);  // a moon: x, y, width, height
-
-  fill(40, 30, 50);          // dark purple
-  rect(0, 300, 480, 60);     // the ground: x, y, width, height
-}`;
-
-	const ghostCode = String.raw`function draw() {
-  background(15, 10, 25);
-  drawGhost(240, 180); // draw a ghost in the middle
-  drawGhost(100, 80);  // and another one, top left
-}
-
-function drawGhost(x, y) {
+	const ghostCode = [
+		{
+			say: 'Add this function at the bottom of your sketch. It draws a minty body and two dark eyes:',
+			src: String.raw`function drawGhost(x, y) {
   noStroke();
-  fill(220, 255, 230);       // minty white body
+  fill(220, 255, 230);
   ellipse(x, y, 60, 60);
 
-  fill(20);                  // almost-black eyes
+  fill(20);
   ellipse(x - 12, y - 5, 10);
   ellipse(x + 12, y - 5, 10);
-}`;
-
-	const wobbleCode = String.raw`let ghost = { x: 240, y: 180 };
-
-function draw() {
+}`
+		},
+		{
+			say: 'Then call it in draw(). Each call draws one, so this draws two:',
+			src: String.raw`function draw() {
   background(15, 10, 25);
+  drawGhost(240, 180);
+  drawGhost(100, 80);
+}`
+		}
+	];
 
-  ghost.x += random(-3, 3); // drift a little left or right
-  ghost.y += random(-3, 3); // drift a little up or down
-
+	const wobbleCode = [
+		{
+			say: 'At the top of your sketch, store where the ghost is:',
+			src: String.raw`let ghost = { x: 240, y: 180 };`
+		},
+		{
+			say: 'In draw(), nudge it a little every frame, then draw it:',
+			src: String.raw`function draw() {
+  background(15, 10, 25);
+  ghost.x += random(-3, 3);
+  ghost.y += random(-3, 3);
   drawGhost(ghost.x, ghost.y);
-}`;
+}`
+		}
+	];
 
-	const spawnCode = String.raw`let ghost;
-let spawnEvery = 60; // frames between jumps (60 frames = about 1 second)
-
-function setup() {
+	const spawnCode = [
+		{
+			say: 'At the top, make the ghost and set how many frames to wait between jumps:',
+			src: String.raw`let ghost;
+let spawnEvery = 60;`
+		},
+		{
+			say: 'Add a function that moves the ghost to a random spot:',
+			src: String.raw`function spawnGhost() {
+  ghost = { x: random(40, width - 40), y: random(40, height - 40) };
+}`
+		},
+		{
+			say: 'Call it once in setup() so the ghost has a starting spot:',
+			src: String.raw`function setup() {
   createCanvas(480, 360);
   spawnGhost();
-}
-
-function draw() {
+}`
+		},
+		{
+			say: 'In draw(), jump every 60th frame, then draw the ghost:',
+			src: String.raw`function draw() {
   background(15, 10, 25);
-  if (frameCount % spawnEvery === 0) spawnGhost(); // every 60th frame
+  if (frameCount % spawnEvery === 0) spawnGhost();
   drawGhost(ghost.x, ghost.y);
-}
+}`
+		}
+	];
 
-function spawnGhost() {
-  ghost = { x: random(40, width - 40), y: random(40, height - 40) };
-}`;
-
-	const clickCode = String.raw`let score = 0;
-
-function mousePressed() {
-  // how far was the click from the ghost's center?
+	const clickCode = [
+		{
+			say: 'At the top, start the score at zero:',
+			src: String.raw`let score = 0;`
+		},
+		{
+			say: 'Add mousePressed(). A hit adds a point and moves the ghost somewhere new:',
+			src: String.raw`function mousePressed() {
   if (dist(mouseX, mouseY, ghost.x, ghost.y) < 30) {
-    score++;       // hit! add a point
-    spawnGhost();  // and move the ghost somewhere new
+    score++;
+    spawnGhost();
   }
-}
-
-// at the end of draw():
-fill(255);
+}`
+		},
+		{
+			say: 'At the end of draw(), show the score:',
+			src: String.raw`fill(255);
 textSize(16);
-text('Score: ' + score, 12, 26);`;
+text('Score: ' + score, 12, 26);`
+		}
+	];
 
-	const timerCode = String.raw`let duration = 30; // seconds per round
-let startTime;
+	const timerCode = [
+		{
+			say: 'At the top, set how many seconds a round lasts:',
+			src: String.raw`let duration = 30;
+let startTime;`
+		},
+		{
+			say: 'In setup(), save when the round started:',
+			src: String.raw`startTime = millis();`
+		},
+		{
+			say: 'In draw(), before drawing the ghost, work out how much time is left:',
+			src: String.raw`let elapsed = (millis() - startTime) / 1000;
+let timeLeft = max(0, duration - elapsed);`
+		},
+		{
+			say: 'Then show it in the top-right corner:',
+			src: String.raw`textAlign(RIGHT, TOP);
+text('Time: ' + ceil(timeLeft), width - 12, 10);`
+		}
+	];
 
-// in setup():
-startTime = millis();
-
-// in draw(), before drawing the ghost:
-let elapsed = (millis() - startTime) / 1000;
-let timeLeft = max(0, duration - elapsed);
-
-textAlign(RIGHT, TOP);
-text('Time: ' + ceil(timeLeft), width - 12, 10);`;
-
-	const finalCode = String.raw`let ghost;
+	const finalCode = [
+		{
+			say: 'The variables. state is always one of start, play, or over:',
+			src: String.raw`let ghost;
 let score = 0;
 let duration = 30;
 let startTime;
-let state = 'start'; // 'start' | 'play' | 'over'
-let spawnEvery = 60;
-
-function setup() {
+let state = 'start';
+let spawnEvery = 60;`
+		},
+		{
+			say: 'setup() makes the canvas and the first ghost:',
+			src: String.raw`function setup() {
   createCanvas(480, 360);
   spawnGhost();
-}
-
-function draw() {
+}`
+		},
+		{
+			say: 'draw() starts with the start and game-over screens. return stops draw() early, so nothing below it runs:',
+			src: String.raw`function draw() {
   background(15, 10, 25);
 
   if (state === 'start') {
@@ -132,16 +207,20 @@ function draw() {
     textSize(22);
     text('Game over\nScore: ' + score + '\nClick to retry', width / 2, height / 2);
     return;
-  }
-
-  let elapsed = (millis() - startTime) / 1000;
+  }`
+		},
+		{
+			say: 'Still in draw(): end the round when the time runs out:',
+			src: String.raw`  let elapsed = (millis() - startTime) / 1000;
   let timeLeft = max(0, duration - elapsed);
   if (timeLeft <= 0) {
     state = 'over';
     return;
-  }
-
-  if (frameCount % spawnEvery === 0) spawnGhost();
+  }`
+		},
+		{
+			say: 'Then move and draw the ghost, show the score and time, and close draw():',
+			src: String.raw`  if (frameCount % spawnEvery === 0) spawnGhost();
   drawGhost(ghost.x, ghost.y);
 
   textAlign(LEFT, TOP);
@@ -150,9 +229,11 @@ function draw() {
   text('Score: ' + score, 12, 10);
   textAlign(RIGHT, TOP);
   text('Time: ' + ceil(timeLeft), width - 12, 10);
-}
-
-function mousePressed() {
+}`
+		},
+		{
+			say: 'mousePressed() starts a new round from the start or game-over screen, and scores hits during play:',
+			src: String.raw`function mousePressed() {
   if (state === 'start' || state === 'over') {
     state = 'play';
     score = 0;
@@ -164,9 +245,11 @@ function mousePressed() {
     score++;
     spawnGhost();
   }
-}
-
-function spawnGhost() {
+}`
+		},
+		{
+			say: 'Last, the two helper functions from earlier:',
+			src: String.raw`function spawnGhost() {
   ghost = { x: random(40, width - 40), y: random(40, height - 40) };
 }
 
@@ -177,85 +260,113 @@ function drawGhost(x, y) {
   fill(20);
   ellipse(x - 12, y - 5, 10);
   ellipse(x + 12, y - 5, 10);
-}`;
+}`
+		}
+	];
 
 	const toolbox = [
 		{
-			id: 'wobble',
 			title: 'Haunted wobble',
-			time: '~5 min',
+			time: '1-2 hours',
 			desc: 'Make the ghost shiver in place while it waits to be clicked.',
-			code: String.raw`// in draw(), just before drawGhost():
-ghost.x += random(-2, 2);
+			code: [
+				{
+					say: 'In draw(), just before drawGhost():',
+					src: String.raw`ghost.x += random(-2, 2);
 ghost.y += random(-2, 2);`
+				}
+			]
 		},
 		{
-			id: 'bounce',
 			title: 'Floating movement',
-			time: '~10 min',
+			time: '1-2 hours',
 			desc: 'Give the ghost a speed and bounce it off the walls instead of sitting still.',
-			code: String.raw`// in spawnGhost(), after making the ghost:
-ghost.vx = random(-2, 2);
-ghost.vy = random(-2, 2);
-
-// in draw(), before drawGhost():
-ghost.x += ghost.vx;
+			code: [
+				{
+					say: 'In spawnGhost(), after making the ghost:',
+					src: String.raw`ghost.vx = random(-2, 2);
+ghost.vy = random(-2, 2);`
+				},
+				{
+					say: 'In draw(), before drawGhost():',
+					src: String.raw`ghost.x += ghost.vx;
 ghost.y += ghost.vy;
 if (ghost.x < 30 || ghost.x > width - 30) ghost.vx *= -1;
 if (ghost.y < 30 || ghost.y > height - 30) ghost.vy *= -1;`
+				}
+			]
 		},
 		{
-			id: 'pumpkin',
 			title: 'Draw a pumpkin',
-			time: '~10 min',
-			desc: 'A second thing to draw. Swap it in for the ghost, or use it as a bonus target.',
-			code: String.raw`function drawPumpkin(x, y) {
+			time: '1-2 hours',
+			desc: 'A second thing to draw: an orange body, a green stem, and a spooky face. Swap it in for the ghost, or use it as a bonus target.',
+			code: [
+				{
+					say: 'Add this function, then call drawPumpkin(x, y) the same way as drawGhost():',
+					src: String.raw`function drawPumpkin(x, y) {
   noStroke();
-  fill(255, 140, 40);          // orange body
+  fill(255, 140, 40);
   ellipse(x, y, 64, 52);
-  fill(60, 140, 60);           // green stem
+  fill(60, 140, 60);
   rect(x - 4, y - 34, 8, 12);
-  fill(30);                    // spooky face
+  fill(30);
   triangle(x - 16, y - 4, x - 8, y - 12, x - 2, y - 4);
   triangle(x + 2, y - 4, x + 8, y - 12, x + 16, y - 4);
   rect(x - 12, y + 8, 24, 5);
 }`
+				}
+			]
 		},
 		{
-			id: 'fade',
 			title: 'See-through ghost',
-			time: '~5 min',
+			time: '1-2 hours',
 			desc: 'A fourth number in fill() is transparency. Make the ghost fade in and out.',
-			code: String.raw`// in drawGhost(), replace the body fill with:
-let alpha = map(sin(frameCount * 0.05), -1, 1, 80, 255);
+			code: [
+				{
+					say: 'In drawGhost(), replace the body fill() with:',
+					src: String.raw`let alpha = map(sin(frameCount * 0.05), -1, 1, 80, 255);
 fill(220, 255, 230, alpha);`
+				}
+			]
 		},
 		{
-			id: 'ramp',
 			title: 'Get harder over time',
-			time: '~10 min',
-			desc: 'Shrink the time between jumps as the round goes on.',
-			code: String.raw`// in draw(), replacing the fixed spawnEvery check:
-let progress = constrain(elapsed / duration, 0, 1);
-let interval = floor(lerp(60, 20, progress)); // 60 frames → 20 frames
+			time: '1-2 hours',
+			desc: 'Shrink the time between jumps from 60 frames to 20 as the round goes on.',
+			code: [
+				{
+					say: 'In draw(), replace the spawnEvery line with:',
+					src: String.raw`let progress = constrain(elapsed / duration, 0, 1);
+let interval = floor(lerp(60, 20, progress));
 if (frameCount % interval === 0) spawnGhost();`
+				}
+			]
 		},
 		{
-			id: 'burst',
 			title: 'Particle burst on a hit',
-			time: '~15 min',
+			time: '1-2 hours',
 			desc: 'Tiny dots fly out from the ghost when you catch it, then fade away.',
-			code: String.raw`let particles = [];
-
-function burst(x, y) {
+			code: [
+				{
+					say: 'At the top of your sketch:',
+					src: String.raw`let particles = [];`
+				},
+				{
+					say: 'Add a function that sends 10 dots flying from a point:',
+					src: String.raw`function burst(x, y) {
   for (let i = 0; i < 10; i++) {
     let a = random(TWO_PI);
     particles.push({ x: x, y: y, vx: cos(a) * 2, vy: sin(a) * 2, life: 1 });
   }
-}
-
-// call burst(ghost.x, ghost.y) on a hit, then in draw():
-for (let i = particles.length - 1; i >= 0; i--) {
+}`
+				},
+				{
+					say: 'In mousePressed(), call it on a hit:',
+					src: String.raw`burst(ghost.x, ghost.y);`
+				},
+				{
+					say: 'At the end of draw(), move, fade, and draw each dot:',
+					src: String.raw`for (let i = particles.length - 1; i >= 0; i--) {
   let pt = particles[i];
   pt.x += pt.vx;
   pt.y += pt.vy;
@@ -265,12 +376,66 @@ for (let i = particles.length - 1; i >= 0; i--) {
   fill(220, 255, 230, pt.life * 255);
   ellipse(pt.x, pt.y, 5);
 }`
+				}
+			]
 		}
 	];
 </script>
 
-{#snippet code(id, src)}
-	<pre class="code-block">{src}</pre>
+{#snippet trackTabs()}
+	<div class="tabs" role="tablist">
+		<button type="button" role="tab" aria-selected={track === 'workshop'} class:active={track === 'workshop'} onclick={() => (track = 'workshop')}>
+			<i class="ph-bold ph-users-three"></i>At a workshop
+		</button>
+		<button type="button" role="tab" aria-selected={track === 'individual'} class:active={track === 'individual'} onclick={() => (track = 'individual')}>
+			<i class="ph-bold ph-user"></i>Individual
+		</button>
+	</div>
+{/snippet}
+
+{#snippet webEditor()}
+	<ol class="howto shots">
+		<li>
+			Go to <a href="https://editor.p5js.org/" target="_blank" rel="noopener">editor.p5js.org</a>.
+			<img src="/media/accountmake.png" alt="The p5.js web editor, with an arrow pointing at Sign up in the top-right corner" />
+			<span class="caption">Click <b>Sign up</b> in the top-right corner to make an account.</span>
+		</li>
+		<li>
+			Fill in a user name, email, and password, or log in with GitHub or Google.
+			<img src="/media/account.png" alt="The p5.js Sign Up form" class="narrow" />
+			<span class="privacy"><i class="ph-bold ph-shield-check"></i>It only asks for the minimum: a user name, an email, and a password. Only your user name shows up next to your sketches, so a nickname is fine.</span>
+		</li>
+		<li>
+			Click the pencil next to the made-up sketch name at the top and type your own.
+			<img src="/media/name.png" alt="The p5.js editor, with an arrow pointing at the sketch name and its pencil icon" />
+			<span class="caption">Name your project!</span>
+		</li>
+		<li>
+			Here's how the editor works:
+			<img src="/media/1234.png" alt="The p5.js editor with five numbered parts" />
+			<ol class="parts">
+				<li><b>Run:</b> runs your code.</li>
+				<li><b>Stop:</b> stops it.</li>
+				<li><b>Code:</b> where you write your sketch.</li>
+				<li><b>Preview:</b> shows what your game looks like.</li>
+				<li><b>Console:</b> shows errors. Look here when something breaks.</li>
+			</ol>
+		</li>
+	</ol>
+{/snippet}
+
+{#snippet withPreview(chunks, sketch, hint)}
+	<div class="split">
+		<div class="split-code">{@render code(chunks)}</div>
+		<Preview {sketch} {hint} />
+	</div>
+{/snippet}
+
+{#snippet code(chunks)}
+	{#each chunks as chunk}
+		{#if chunk.say}<p class="where">{chunk.say}</p>{/if}
+		<pre class="code-block">{chunk.src}</pre>
+	{/each}
 {/snippet}
 
 <svelte:head>
@@ -284,20 +449,21 @@ for (let i = particles.length - 1; i >= 0; i--) {
 <main>
 	<header class="intro">
 		<h1>Get started with p5.js</h1>
-		<p class="lead">This guide assumes you've never used p5.js. You'll learn how drawing works, draw your own ghost, make it move, and finish with <a href="/play/">Ghost Hunt</a>: the same base game everyone starts from.</p>
+		<p class="lead">This guide assumes you've never used p5.js. You'll learn how drawing works, draw your own ghost, and make it move.</p>
 		<div class="facts">
-			<span><b>Needs:</b> a browser</span>
+			<span><b>Needs:</b> a browser, plus VS Code if you're on your own</span>
 			<span><b>Language:</b> JavaScript</span>
-			<span><b>Time:</b> ~30 min for the base game</span>
+			<span><b>Time:</b> about 1 hour for the base game</span>
 		</div>
 	</header>
 
 	<nav class="toc">
 		<span class="label">On this page</span>
 		<ol>
+			<li><a href="#setup">Set up</a></li>
 			<li><a href="#what">What is p5.js?</a></li>
 			<li><a href="#draw">Draw shapes</a></li>
-			<li><a href="#ghost">Draw your ghost</a></li>
+			<li><a href="#ghost">Draw your creature</a></li>
 			<li><a href="#move">Make it move randomly</a></li>
 			<li><a href="#click">Click to score</a></li>
 			<li><a href="#timer">Add a timer</a></li>
@@ -307,22 +473,54 @@ for (let i = particles.length - 1; i >= 0; i--) {
 		</ol>
 	</nav>
 
+	<section class="step" id="setup">
+		<h2><span class="num">1</span>Set up</h2>
+		<p>Where you write your code depends on how you're building. Pick one:</p>
+		{@render trackTabs()}
+
+		{#if track === 'workshop'}
+			<div class="panel" role="tabpanel">
+				<p>At a club workshop, you build everything in the free p5.js web editor. Nothing to install.</p>
+				{@render webEditor()}
+			</div>
+		{:else}
+			<div class="panel" role="tabpanel">
+				<p>On your own, your coding time has to be tracked. Pick one way:</p>
+				<h3>Option A: Lapse + the web editor</h3>
+				<p>Record your time with <a href="https://lapse.hackclub.com" target="_blank" rel="noopener">lapse.hackclub.com</a>, and build in the p5.js web editor, the same way as a workshop. Questions about Lapse? <a href="https://hackclub.enterprise.slack.com/archives/C0AJ1FK8E8Z" target="_blank" rel="noopener">Ask in the Slack</a>.</p>
+				{@render webEditor()}
+				<h3>Option B: VS Code + Hackatime</h3>
+				<p><a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">Hackatime</a> tracks your time in code editors like VS Code.</p>
+				<ol class="howto">
+					<li>Install <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code</a>.</li>
+					<li>Go to <a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">hackatime.hackclub.com</a>, sign in, and follow its setup steps. They connect VS Code to your account, so your time is logged while you code.</li>
+					<li>Make a folder called <code>ghost-hunt</code> and open it in VS Code with <b>File → Open Folder</b>.</li>
+					<li>Make a file called <code>index.html</code> in the folder and paste this in. It loads p5.js and your game:
+						{@render code(indexCode)}
+					</li>
+					<li>Make a second file called <code>sketch.js</code>. Your game code goes here.</li>
+					<li>Install the <b>Live Server</b> extension. Open <code>index.html</code> and click <b>Go Live</b> in the bottom bar. Your game opens in the browser and reloads every time you save.</li>
+				</ol>
+			</div>
+		{/if}
+	</section>
+
 	<section class="step" id="what">
-		<h2><span class="num">1</span>What is p5.js?</h2>
+		<h2><span class="num">2</span>What is p5.js?</h2>
 		<p>p5.js is a JavaScript library for drawing and animating in the browser. You get a <b>canvas</b>, a rectangle of pixels, and simple functions like <code>ellipse()</code> and <code>rect()</code> to draw on it.</p>
 		<p>Every p5.js sketch has two special functions:</p>
 		<ul>
 			<li><code>setup()</code> runs <b>once</b> when the sketch starts. Make the canvas here.</li>
 			<li><code>draw()</code> runs <b>again and again</b>, about 60 times a second. Each run is one frame, like a page in a flipbook.</li>
 		</ul>
-		<p>Open <a href="https://editor.p5js.org/" target="_blank" rel="noopener">editor.p5js.org</a>. It already starts you with this code:</p>
-		{@render code('setup', setupCode)}
+		<p>The p5.js web editor starts you with this code. In VS Code, paste it into <code>sketch.js</code>:</p>
+		{@render withPreview(setupCode, previews.starter, '')}
 		<p>Here's what each line does:</p>
 		<ul>
 			<li><code>createCanvas(400, 400)</code> makes the drawing area: 400 pixels wide, 400 pixels tall. It's in <code>setup()</code> because you only need one canvas.</li>
 			<li><code>background(220)</code> paints the whole canvas one color. With a single number, it's a shade of gray: <code>0</code> is black, <code>255</code> is white, so <code>220</code> is light gray. It's in <code>draw()</code> so every frame starts from a clean canvas.</li>
 		</ul>
-		<div class="note"><i class="ph-bold ph-play"></i><span>Press the ▶ Play button. You'll see a light gray square: that's your game screen.</span></div>
+		<div class="note"><i class="ph-bold ph-play"></i><span>Press ▶ Play in the web editor, or save in VS Code with Live Server running. You'll see a light gray square: that's your game screen.</span></div>
 		<div class="callout">
 			<h3>How positions work</h3>
 			<p>Every point on the canvas is an <b>(x, y)</b> pair. <code>(0, 0)</code> is the <b>top-left</b> corner. <b>x</b> grows to the right, <b>y</b> grows <b>downward</b>. On a 400 × 400 canvas, the middle is <code>(200, 200)</code>. Inside your sketch, <code>width</code> and <code>height</code> hold those sizes for you.</p>
@@ -330,7 +528,7 @@ for (let i = particles.length - 1; i >= 0; i--) {
 	</section>
 
 	<section class="step" id="draw">
-		<h2><span class="num">2</span>Draw shapes</h2>
+		<h2><span class="num">3</span>Draw shapes</h2>
 		<p>First, set up the game screen: change the canvas to <code>createCanvas(480, 360)</code> (wider, like a game) and the background to <code>background(15, 10, 25)</code> (dark purple, for a spooky night). The rest of the guide uses these values.</p>
 		<p>Drawing in p5.js works like painting: pick a color, then draw a shape with it. Shapes drawn later go on top.</p>
 		<ul>
@@ -340,50 +538,50 @@ for (let i = particles.length - 1; i >= 0; i--) {
 			<li><code>ellipse(x, y, w, h)</code> draws a circle or oval centered at (x, y).</li>
 			<li><code>rect(x, y, w, h)</code> draws a rectangle from its top-left corner.</li>
 		</ul>
-		{@render code('shapes', shapesCode)}
+		{@render withPreview(shapesCode, previews.shapes, '')}
 		<div class="note"><i class="ph-bold ph-lightbulb"></i><span><b>Try it:</b> move the moon by changing <code>400, 60</code>. Change the fill numbers to make a blood-red moon.</span></div>
 	</section>
 
 	<section class="step" id="ghost">
-		<h2><span class="num">3</span>Draw your ghost</h2>
+		<h2><span class="num">4</span>Draw your creature</h2>
 		<p>Now make a drawing of your own. Put the drawing inside a <b>function</b> with <code>x</code> and <code>y</code> parameters. Then you can draw the ghost anywhere, as many times as you want, with one line.</p>
 		<p>Every shape inside uses <code>x</code> and <code>y</code> as its starting point, so the eyes move with the body.</p>
-		{@render code('ghost', ghostCode)}
+		{@render withPreview(ghostCode, previews.creature, '')}
 		<div class="note"><i class="ph-bold ph-paint-brush"></i><span><b>Your turn:</b> make it yours. Add a mouth with another <code>ellipse()</code>, give it a hat with <code>rect()</code>, or change its color. Keep the body about 60 pixels wide: the click check later expects that.</span></div>
 	</section>
 
 	<section class="step" id="move">
-		<h2><span class="num">4</span>Make it move randomly</h2>
+		<h2><span class="num">5</span>Make it move randomly</h2>
 		<p><code>random(a, b)</code> gives you a different number between <code>a</code> and <code>b</code> every time you call it. That's the key to anything unpredictable.</p>
 		<p>First, store the ghost's position in a <b>variable</b> so it can change between frames. <code>{'{ x: 240, y: 180 }'}</code> is an <b>object</b>: one variable holding both numbers.</p>
 		<h3>Option A: haunted drift</h3>
 		<p>Nudge the ghost a random amount every frame. It shivers and wanders around like it's possessed.</p>
-		{@render code('wobble', wobbleCode)}
+		{@render withPreview(wobbleCode, previews.drift, '')}
 		<h3>Option B: teleport</h3>
 		<p>This is what Ghost Hunt does. Every 60 frames (about one second), the ghost jumps to a random spot. <code>frameCount</code> counts frames since the start, and <code>%</code> gives the remainder of a division, so <code>frameCount % 60 === 0</code> is true once every 60 frames.</p>
-		{@render code('spawn', spawnCode)}
+		{@render withPreview(spawnCode, previews.teleport, '')}
 		<div class="note"><i class="ph-bold ph-lightbulb"></i><span>The <code>40</code> and <code>width - 40</code> keep the ghost from spawning half off the edge. Keep your <code>drawGhost()</code> function from step 3 at the bottom of the file.</span></div>
 	</section>
 
 	<section class="step" id="click">
-		<h2><span class="num">5</span>Click to score</h2>
+		<h2><span class="num">6</span>Click to score</h2>
 		<p>p5.js calls <code>mousePressed()</code> every time you click. <code>mouseX</code> and <code>mouseY</code> hold where the click happened.</p>
 		<p><code>dist()</code> measures the distance between two points. The ghost is 60 pixels wide, so its radius is 30: a click closer than 30 pixels to its center is a hit. An <code>if</code> statement runs code only when that's true.</p>
-		{@render code('click', clickCode)}
+		{@render withPreview(clickCode, previews.click, 'click the ghost')}
 		<div class="note"><i class="ph-bold ph-cursor-click"></i><span><b>Try it:</b> click the ghost a few times. The score goes up and the ghost jumps somewhere new.</span></div>
 	</section>
 
 	<section class="step" id="timer">
-		<h2><span class="num">6</span>Add a timer</h2>
+		<h2><span class="num">7</span>Add a timer</h2>
 		<p><code>millis()</code> is how many milliseconds have passed since the sketch started (1000 ms = 1 second). Save it when the round begins, and subtract to see how long the round has lasted.</p>
-		{@render code('timer', timerCode)}
+		{@render withPreview(timerCode, previews.timer, 'click the ghost')}
 	</section>
 
 	<section class="step" id="together">
-		<h2><span class="num">7</span>Put it together</h2>
+		<h2><span class="num">8</span>Put it together</h2>
 		<p>One last idea: a <code>state</code> variable decides what the screen shows. <code>'start'</code> shows a title, <code>'play'</code> runs the game, <code>'over'</code> shows your score. A click moves between them.</p>
-		<p>Here's the complete game. Replace everything in the editor with it:</p>
-		{@render code('final', finalCode)}
+		<p>Here's the complete game, piece by piece. Clear the editor, then copy each piece in, top to bottom:</p>
+		{@render withPreview(finalCode, previews.full, 'click to play')}
 		<div class="done">
 			<i class="ph-bold ph-ghost"></i>
 			<div>
@@ -393,21 +591,21 @@ for (let i = particles.length - 1; i >= 0; i--) {
 	</section>
 
 	<section class="step" id="toolbox">
-		<h2><span class="num">8</span>Toolbox: make it yours</h2>
-		<p>Short functions you can drop into your game. Pick 1-3 that sound fun. Want to see them all combined? Check the <a href="/demo/">full demo</a>.</p>
+		<h2><span class="num">9</span>Toolbox: make it yours</h2>
+		<p>Features you can add to your game. Each one takes about 1-2 hours to add and make your own. Pick 1-3 that sound fun. Want to see them all combined? Check the <a href="/demo/">full demo</a>.</p>
 		<div class="tools">
 			{#each toolbox as tool}
 				<article class="tool">
 					<div class="tool-head"><h3>{tool.title}</h3><span class="tag">{tool.time}</span></div>
 					<p>{tool.desc}</p>
-					{@render code(tool.id, tool.code)}
+					{@render withPreview(tool.code, previews.toolbox[tool.title], tool.title === 'Draw a pumpkin' ? '' : 'click to play')}
 				</article>
 			{/each}
 		</div>
 	</section>
 
 	<section class="step" id="checklist">
-		<h2><span class="num">9</span>Checklist &amp; submit</h2>
+		<h2><span class="num">10</span>Checklist &amp; submit</h2>
 		<ul class="checks">
 			<li><i class="ph-bold ph-check-square"></i>Your game starts from the Ghost Hunt base above</li>
 			<li><i class="ph-bold ph-check-square"></i>It has a start screen, a play state, and a game-over screen</li>
@@ -416,14 +614,7 @@ for (let i = particles.length - 1; i >= 0; i--) {
 			<li><i class="ph-bold ph-check-square"></i>You wrote it yourself: AI only to unblock a single line</li>
 		</ul>
 		<p>Read the <a href="/requirements/">full requirements</a> once more. How you submit depends on how you're building:</p>
-		<div class="tabs" role="tablist">
-			<button type="button" role="tab" aria-selected={track === 'workshop'} class:active={track === 'workshop'} onclick={() => (track = 'workshop')}>
-				<i class="ph-bold ph-users-three"></i>At a workshop
-			</button>
-			<button type="button" role="tab" aria-selected={track === 'individual'} class:active={track === 'individual'} onclick={() => (track = 'individual')}>
-				<i class="ph-bold ph-user"></i>Individual
-			</button>
-		</div>
+		{@render trackTabs()}
 
 		{#if track === 'workshop'}
 			<div class="panel" role="tabpanel">
@@ -438,14 +629,25 @@ for (let i = particles.length - 1; i >= 0; i--) {
 			</div>
 		{:else}
 			<div class="panel" role="tabpanel">
-				<p>Building on your own? You have to track your coding time with <a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">Hackatime</a>. It only tracks code editors like VS Code, not the p5.js web editor, so build your game in VS Code.</p>
+				<p>On your own, you submit your code on GitHub and a live link where anyone can play your game. Both are free. GitHub Pages turns your repo into a website.</p>
+				<p>First, make a free account on <a href="https://github.com/" target="_blank" rel="noopener">github.com</a>.</p>
+				<h3>Used the web editor (Lapse)?</h3>
 				<ol class="howto">
-					<li>Go to <a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">hackatime.hackclub.com</a>, sign in, and follow the setup steps for VS Code.</li>
-					<li>In VS Code, install the <b>p5.vscode</b> extension, then run <b>Create p5.js Project</b> from the command palette (<code>Ctrl+Shift+P</code>).</li>
-					<li>Install the <b>Live Server</b> extension and click <b>Go Live</b> to play your game in the browser. Hackatime logs your time while you code.</li>
-					<li>When you're done, make a free account on <a href="https://editor.p5js.org/" target="_blank" rel="noopener">editor.p5js.org</a>, paste in your <code>sketch.js</code>, then <b>File → Save</b> and <b>File → Share</b> to get your game's link.</li>
-					<li>Submit that link using the button below.</li>
+					<li>In the p5.js editor, click <b>File → Download</b> and unzip the file.</li>
+					<li>On github.com, click <b>+ → New repository</b>, name it <code>ghost-hunt</code>, make it <b>Public</b>, and click <b>Create repository</b>.</li>
+					<li>Click <b>uploading an existing file</b>, drag in everything from the unzipped folder (<code>index.html</code>, <code>sketch.js</code>, and the rest), and click <b>Commit changes</b>.</li>
+					<li>Turn on GitHub Pages and submit: follow the last 3 steps under <b>Used VS Code?</b> below.</li>
 				</ol>
+				<h3>Used VS Code?</h3>
+				<ol class="howto">
+					<li>In VS Code, open <b>Source Control</b> (<code>Ctrl+Shift+G</code>) and click <b>Initialize Repository</b>.</li>
+					<li>Type a message like <code>first version</code> and click <b>Commit</b>. If it asks to stage your changes, click <b>Yes</b>.</li>
+					<li>Click <b>Publish Branch</b>, sign in to GitHub, and pick <b>Publish to GitHub public repository</b>. VS Code makes the repo and uploads your code.</li>
+					<li>On github.com, open your repo and go to <b>Settings → Pages</b>. Under <b>Build and deployment</b>, set <b>Source</b> to <b>Deploy from a branch</b>, pick <b>main</b> and <b>/ (root)</b>, and click <b>Save</b>.</li>
+					<li>Wait about a minute and refresh. Your game's link appears at the top of that page, like <code>https://your-name.github.io/ghost-hunt/</code>. Open it and make sure the game plays.</li>
+					<li>Submit your repo link and your Pages link with the button below.</li>
+				</ol>
+				<div class="note"><i class="ph-bold ph-lightbulb"></i><span>Changed something? <b>Commit</b>, then click <b>Sync Changes</b>. Your live link updates about a minute later. Keep <code>index.html</code> in the top of your folder, not in a subfolder, or Pages shows a 404 page.</span></div>
 				<div class="cta">
 					<a class="btn primary" href={SUBMIT_URL}><i class="ph-bold ph-rocket-launch"></i>Submit your game</a>
 					<a class="btn ghost" href="https://hackatime.hackclub.com" target="_blank" rel="noopener"><i class="ph-bold ph-clock"></i>Set up Hackatime</a>
@@ -488,7 +690,7 @@ for (let i = particles.length - 1; i >= 0; i--) {
 	main {
 		flex: 1;
 		width: 100%;
-		max-width: 820px;
+		max-width: 980px;
 		margin: 0 auto;
 		padding: clamp(24px, 5vh, 56px) 20px 56px;
 	}
@@ -611,6 +813,28 @@ for (let i = particles.length - 1; i >= 0; i--) {
 		gap: 6px;
 	}
 
+	.step p.where {
+		margin: 16px 0 0;
+		font-weight: 700;
+	}
+	.step p.where + .code-block {
+		margin-top: 8px;
+	}
+	.split {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 280px;
+		gap: 20px;
+		align-items: start;
+		margin: 14px 0;
+	}
+	.split-code > :first-child {
+		margin-top: 0;
+	}
+	@media (max-width: 760px) {
+		.split {
+			grid-template-columns: 1fr;
+		}
+	}
 	.code-block {
 		margin: 14px 0;
 		padding: 14px 16px;
@@ -777,6 +1001,43 @@ for (let i = particles.length - 1; i >= 0; i--) {
 		color: var(--parchment-dim);
 		display: grid;
 		gap: 8px;
+	}
+	.howto.shots {
+		gap: 22px;
+	}
+	.shots img {
+		display: block;
+		width: 100%;
+		height: auto;
+		margin: 10px 0 0;
+		border: 1px solid var(--panel-line);
+		border-radius: 8px;
+	}
+	.shots img.narrow {
+		max-width: 320px;
+	}
+	.caption {
+		display: block;
+		margin-top: 8px;
+		color: var(--parchment);
+		font-weight: 700;
+	}
+	.privacy {
+		display: flex;
+		gap: 8px;
+		align-items: flex-start;
+		margin-top: 10px;
+		color: var(--parchment-dim);
+	}
+	.privacy i {
+		color: var(--mint);
+		margin-top: 4px;
+	}
+	.parts {
+		margin: 10px 0 0;
+		padding-left: 22px;
+		display: grid;
+		gap: 4px;
 	}
 	.howto b {
 		color: var(--parchment);

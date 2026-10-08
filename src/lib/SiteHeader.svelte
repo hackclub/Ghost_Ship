@@ -4,7 +4,6 @@
 	const tabs = [
 		{ id: 'guide', label: 'Guide', href: '/tutorial/', icon: 'ph-book-open' },
 		{ id: 'requirements', label: 'Requirements', href: '/requirements/', icon: 'ph-list-checks' },
-		{ id: 'workshop', label: 'Run a Workshop', href: '/jam/', icon: 'ph-users-three' },
 		{ id: 'submit', label: 'Submit', href: '/submit/', icon: 'ph-rocket-launch' },
 		{ id: 'faq', label: 'FAQ', href: '/faq/', icon: 'ph-question' }
 	];
@@ -21,7 +20,7 @@
 		</g>
 	</svg>
 	<a class="flag-link" href="https://hackclub.com" target="_blank" rel="noopener">
-		<img src="/media/flag-orpheus-toffee.svg" alt="Hack Club" />
+		<img src="/media/flag-orpheus-pumpkin.svg" alt="Hack Club" />
 	</a>
 	<nav class="site-nav">
 		{#each tabs as tab}

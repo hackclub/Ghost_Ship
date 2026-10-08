@@ -14,7 +14,7 @@
 <main>
 	<header class="intro">
 		<h1>Requirements</h1>
-		<p>Here's what your game needs to get candy.</p>
+		<p>Here's what your game needs to get candy. The base game takes about 1 hour.</p>
 	</header>
 
 	<section class="block">
@@ -23,21 +23,21 @@
 			<li>Be made with only p5.js!</li>
 			<li>Be playable through a demo link.</li>
 			<li>Be Halloween themed, with your own monster(s).</li>
-			<li>Doing it on your own? Track your time with <a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">Hackatime</a>.</li>
+			<li>Doing it on your own? Track your time with <a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">Hackatime</a>, put your code in a public GitHub repo, and deploy it with GitHub Pages. The <a href="/tutorial/">guide</a> shows how.</li>
 		</ul>
 	</section>
 
 	<section class="block bonus">
 		<h2><i class="ph-bold ph-star"></i>Bonus challenges</h2>
-		<p class="sub">Optional. Finish them on top of the requirements above to earn extra rewards.</p>
+		<p class="sub">Optional. Finish them on top of the requirements above to earn extra rewards. Each one takes about 3-5 hours.</p>
 		<div class="bonus-grid">
 			<article class="bonus-card">
-				<span class="tag">Bonus 1</span>
+				<span class="tag">Bonus 1 · 3-5 hours</span>
 				<h3><i class="ph-bold ph-paint-brush"></i>Custom art &amp; sound</h3>
 				<p>Give your effects your own art, add your own sound effects, or both. For example: a burst you drew when a ghost is caught, or a "boo" you recorded yourself.</p>
 			</article>
 			<article class="bonus-card">
-				<span class="tag">Bonus 2</span>
+				<span class="tag">Bonus 2 · 3-5 hours</span>
 				<h3><i class="ph-bold ph-stairs"></i>Two more levels</h3>
 				<p>Add two extra levels, each harder than the last. Make the ghost faster, give less time, add more ghosts, or throw in something new to dodge.</p>
 			</article>
