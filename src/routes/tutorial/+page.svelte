@@ -717,7 +717,7 @@ function drawGhost(x, y) {
 					<div class="note"><i class="ph-bold ph-lightbulb"></i><span>Changed something? <b>Commit</b>, then click <b>Sync Changes</b>, and your live link will update about a minute later. Keep <code>index.html</code> in the top of your folder, not in a subfolder, or Pages shows a 404 page.</span></div>
 				{/if}
 				<div class="cta">
-					<a class="btn primary" href={SUBMIT_URL}><i class="ph-bold ph-rocket-launch"></i>Submit your game</a>
+					<a class="btn primary" href={SUBMIT_URL} target="_blank" rel="noopener"><i class="ph-bold ph-rocket-launch"></i>Submit your game</a>
 					{#if tool === 'lapse'}
 						<a class="btn ghost" href="https://lapse.hackclub.com" target="_blank" rel="noopener"><i class="ph-bold ph-video-camera"></i>Open Lapse</a>
 					{:else}

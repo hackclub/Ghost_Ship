@@ -22,7 +22,7 @@
 		</g>
 	</svg>
 	<a class="flag-link" href="https://hackclub.com" target="_blank" rel="noopener">
-		<img src="/media/flag-orpheus-pumpkin.svg" alt="Hack Club" />
+		<img src="/media/flag-orpheus-red.svg" alt="Hack Club" />
 	</a>
 	<nav class="site-nav">
 		{#each tabs as tab}

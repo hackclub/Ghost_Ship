@@ -22,9 +22,10 @@
 			<p class="intro">Make a Halloween-themed game in p5.js. Whether it's by yourself or in a club meeting, complete the guide and submit it to get candy for Halloween, along with a sticker sheet!</p>
 			<div class="cta">
 				<a class="btn primary" href="/tutorial/"><i class="ph-bold ph-book-open"></i>Guide</a>
-				<a class="btn ghost" href={SUBMIT_URL}><i class="ph-bold ph-rocket-launch"></i>Individual Submissions</a>
+				<a class="btn ghost" href={SUBMIT_URL} target="_blank" rel="noopener"><i class="ph-bold ph-rocket-launch"></i>Individual Submissions</a>
 				<a class="btn ghost" href="https://clubs.hackclub.com/" target="_blank" rel="noopener"><i class="ph-bold ph-users-three"></i>Run a Workshop</a>
 			</div>
+			<p class="sponsor">Sponsored by Jared</p>
 		</div>
 	</section>
 
@@ -343,5 +344,10 @@
 		color: var(--mint);
 		font-size: 18px;
 		flex-shrink: 0;
+	}
+	.sponsor {
+		margin: 18px 0 0;
+		font-size: 14px;
+		color: var(--parchment-dim);
 	}
 </style>

@@ -19,13 +19,13 @@
 	</header>
 
 	<div class="choices">
-		<a class="choice" href={SUBMIT_URL}>
+		<a class="choice" href={SUBMIT_URL} target="_blank" rel="noopener">
 			<i class="ph-bold ph-user"></i>
 			<h2>Individual</h2>
 			<p>You built your game on your own, you have to have tracked your time with hackatime!</p>
 			<span class="go">Individual form<i class="ph-bold ph-arrow-right"></i></span>
 		</a>
-		<a class="choice" href={WORKSHOP_SUBMIT_URL}>
+		<a class="choice" href={WORKSHOP_SUBMIT_URL} target="_blank" rel="noopener">
 			<i class="ph-bold ph-users-three"></i>
 			<h2>Workshop</h2>
 			<p>You built your game at a club meeting, and your club leader can send in everyone's games together.</p>
