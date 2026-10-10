@@ -14,7 +14,7 @@
 
 <main>
 	<header class="intro">
-		<h1>Submit your game</h1>
+		<h1>Submit your game here!</h1>
 		<p>Check the <a href="/requirements/">requirements</a> first, then pick the form that matches how you built your game.</p>
 	</header>
 
@@ -22,7 +22,7 @@
 		<a class="choice" href={SUBMIT_URL}>
 			<i class="ph-bold ph-user"></i>
 			<h2>Individual</h2>
-			<p>You built your game on your own, so include your demo link and your tracked time.</p>
+			<p>You built your game on your own, you have to have tracked your time with hackatime!</p>
 			<span class="go">Individual form<i class="ph-bold ph-arrow-right"></i></span>
 		</a>
 		<a class="choice" href={WORKSHOP_SUBMIT_URL}>
@@ -49,9 +49,11 @@
 		--font-display: 'Griffy', cursive;
 		--font-body: 'Phantom Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 	}
+
 	:global(*) {
 		box-sizing: border-box;
 	}
+	
 	.page {
 		min-height: 100vh;
 		min-height: 100dvh;

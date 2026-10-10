@@ -23,7 +23,7 @@
 			<div class="cta">
 				<a class="btn primary" href="/tutorial/"><i class="ph-bold ph-book-open"></i>Guide</a>
 				<a class="btn ghost" href={SUBMIT_URL}><i class="ph-bold ph-rocket-launch"></i>Individual Submissions</a>
-				<a class="btn ghost" href="/jam/"><i class="ph-bold ph-users-three"></i>Run a Workshop</a>
+				<a class="btn ghost" href="https://clubs.hackclub.com/" target="_blank" rel="noopener"><i class="ph-bold ph-users-three"></i>Run a Workshop</a>
 			</div>
 		</div>
 	</section>
@@ -31,10 +31,10 @@
 	<section class="reqs" id="requirements">
 		<h2>Requirements</h2>
 		<ul>
-			<li><i class="ph-bold ph-code"></i>Use p5.js, either in the web editor or in VS Code.</li>
-			<li><i class="ph-bold ph-game-controller"></i>A full playable game!</li>
-			<li><i class="ph-bold ph-ghost"></i>Halloween themed: think of some spooky creatures!</li>
-			<li><i class="ph-bold ph-link"></i>Submit a playable link: the p5.js web editor at a workshop, or GitHub Pages on your own.</li>
+			<li><i class="ph-bold ph-code"></i>Use p5.js(either in the web editor or in VS Code)!</li>
+			<li><i class="ph-bold ph-game-controller"></i>A full playable (and fun) game!</li>
+			<li><i class="ph-bold ph-ghost"></i>Halloween themed; think of some spooky creatures! OooOooo</li>
+			<li><i class="ph-bold ph-link"></i>Submit a playable link: eiither a p5.js web editor link, or GitHub Pages on your own.</li>
 		</ul>
 		<a class="btn primary" href="/requirements/"><i class="ph-bold ph-list-checks"></i>Full requirements</a>
 	</section>
@@ -144,12 +144,14 @@
 		animation: orbit 6s linear infinite;
 		animation-delay: calc(var(--i) * -0.75s);
 	}
+
 	@keyframes orbit {
 		0.00% {
 			transform: translate(1.000em, -0.120em) scale(0.820);
 			opacity: 0.35;
 			z-index: 1;
 		}
+		
 		6.25% {
 			transform: translate(0.924em, -0.074em) scale(0.889);
 			opacity: 0.60;
@@ -172,7 +174,7 @@
 		}
 		31.25% {
 			transform: translate(-0.383em, -0.009em) scale(0.986);
-			opacity: 0.95;
+			opacity: 0.95;	
 			z-index: 1;
 		}
 		37.50% {

@@ -680,11 +680,16 @@ function drawGhost(x, y) {
 
 		{#if track === 'workshop'}
 			<div class="panel" role="tabpanel">
-				<p>Once your game is finished in the p5.js web editor, here's how to share it:</p>
-				<ol class="howto">
-					<li>Make sure you're logged in, then click <b>File → Save</b> so your latest changes are saved.</li>
-					<li>Click <b>File → Share</b> and copy the <b>Edit</b> link, which shows your code and lets anyone press ▶ to play.</li>
-					<li>Open the link in a new tab to check that the game loads and plays.</li>
+				<p>Once your game is finished in the p5.js web editor, here's how to share it. For example, this is what my project, Bat Catcher, looks like:</p>
+				<video class="demo-video" src="/media/demo.mp4" controls muted loop playsinline preload="metadata"></video>
+				<ol class="howto shots">
+					<li>
+						Make sure you're logged in, then open the <b>File</b> menu and click <b>Save</b> (or press <code>Ctrl+S</code>).
+						<img src="/media/save.png" alt="The p5.js editor File menu open, with Save near the top and Share greyed out" />
+						<span class="caption">This is where you save your project. Share and Download stay greyed out until you save.</span>
+					</li>
+					<li>After you save, the link in your browser's address bar changes to your sketch's own link, and that's the link you share. For example, Bat Catcher got saved as <a href="https://editor.p5js.org/ckacha/sketches/KYHFeDnq-" target="_blank" rel="noopener"><code>editor.p5js.org/ckacha/sketches/KYHFeDnq-</code></a>, which shows the code and lets anyone press ▶ to play.</li>
+					<li>Open your link in a new tab to check that the game loads and plays.</li>
 					<li>Paste the link into your club's submission form, or send it to your club leader.</li>
 				</ol>
 				<div class="note"><i class="ph-bold ph-lightbulb"></i><span>Built your game in VS Code instead? Switch to <b>Submitting as an individual</b>, follow the VS Code steps to put it on GitHub Pages, and give your club leader that link.</span></div>
@@ -696,7 +701,7 @@ function drawGhost(x, y) {
 				{@render toolTabs()}
 				{#if tool === 'lapse'}
 					<ol class="howto">
-						<li>In the p5.js editor, click <b>File → Download</b> and unzip the file.</li>
+						<li>In the p5.js editor, click <b>File → Save</b> first, since Download stays greyed out until you save, then click <b>File → Download</b> and unzip the file.</li>
 						<li>On github.com, click <b>+ → New repository</b>, give it a name, make it <b>Public</b>, and click <b>Create repository</b>.</li>
 						<li>Click <b>uploading an existing file</b>, drag in everything from the unzipped folder (<code>index.html</code>, <code>sketch.js</code>, and the rest), and click <b>Commit changes</b>.</li>
 						{@render pagesSteps()}
@@ -1088,6 +1093,14 @@ function drawGhost(x, y) {
 	}
 	.docs a {
 		color: var(--pumpkin);
+	}
+	.demo-video {
+		display: block;
+		width: 100%;
+		margin: 4px 0 18px;
+		border: 1px solid var(--panel-line);
+		border-radius: 8px;
+		background: #000;
 	}
 	.features-title {
 		margin-top: 28px;

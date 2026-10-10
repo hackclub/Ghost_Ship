@@ -21,7 +21,7 @@
 		},
 		{
 			q: 'Do I need a club to take part?',
-			a: 'Nope! Build it on your own and send it in as an <a href="/submit/">individual submission</a>, or <a href="/jam/">run a workshop</a> at your club.'
+			a: "Nope! Build it on your own and send it in as an <a href=\"/submit/\">individual submission</a>, or <a href=\"https://clubs.hackclub.com/\" target=\"_blank\" rel=\"noopener\">run a workshop</a> at your club. Don't have one? <a href=\"https://apply.hackclub.com/\" target=\"_blank\" rel=\"noopener\">Apply here</a>."
 		},
 		{
 			q: 'Do I need to install anything?',
@@ -29,7 +29,7 @@
 		},
 		{
 			q: 'Can I use AI?',
-			a: "For unblocking a single line, sure, but not for writing your game or your upgrades, because the point is that you built the thing you're showing off."
+			a: "For fixing errors after lots of struggling, sure, but not for writing your game or your upgrades, because the point is that you built the thing you're showing off."
 		},
 		{
 			q: 'How do I get candy?',
@@ -57,7 +57,7 @@
 <main>
 	<header class="intro">
 		<h1>FAQ</h1>
-		<p>Questions people ask before they start building.</p>
+		<p>Some commonly asked questions.</p>
 	</header>
 
 	{#each faqs as item}

@@ -14,6 +14,12 @@
 			href: '/demo/',
 			icon: 'ph-sparkle',
 			desc: 'The mini demo with extra parts added: pumpkins, candy, bats, 3 lives, sound effects, and a high score.'
+		},
+		{
+			title: 'Bats!',
+			href: '/bat/',
+			icon: 'ph-moon-stars',
+			desc: 'The same idea as the base game but with a twist: flapping bats, a starry sky, and 20 seconds until sunrise!'
 		}
 	];
 </script>

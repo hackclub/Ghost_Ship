@@ -15,7 +15,7 @@
 <main>
 	<header class="intro">
 		<h1>Requirements</h1>
-		<p>Here's what your game needs to get candy, and the base game takes about 1 hour.</p>
+		<p>Here's what your game needs to have to get candy:</p>
 	</header>
 
 	<section class="block">

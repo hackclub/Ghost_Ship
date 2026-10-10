@@ -15,7 +15,7 @@
 
 	<header class="masthead">
 		<h1 class="title">Ghost Ship</h1>
-		<p class="tagline">One club meeting. One haunted canvas. Everyone leaves with a game where you click the ghosts before the clock runs out. Beginners finish it; everyone else breaks it in new directions.</p>
+		<p class="tagline">One club meeting and tons of spooky games! Everyone leaves with a game where you click the ghosts before the clock runs out. Beginners finish it; everyone else breaks it in new directions.</p>
 
 		<div class="facts">
 			<div class="fact"><span class="k">Duration</span><span class="v">90-120 min</span></div>
@@ -134,6 +134,7 @@
 
 		<div class="tier tier--3">
 			<div class="tier-head"><h3>Tier 3: Boss level</h3><span class="tier-time">~30-45 min, for the experienced</span></div>
+			
 			<div class="upgrade-grid">
 				<div class="upgrade"><div class="name">Boss enemy<span class="badge">advanced</span></div><p>A big ghost with an on-screen health bar that takes multiple clicks and has its own attack pattern.</p></div>
 				<div class="upgrade"><div class="name">Fog, lightning &amp; jumpscares<span class="badge">atmosphere</span></div><p>A semi-transparent particle layer for fog, a screen-flash for lightning, a full-screen sprite for a miss-streak jumpscare.</p></div>
@@ -141,12 +142,13 @@
 				<div class="upgrade"><div class="name">Combo multiplier<span class="badge">advanced</span></div><p>Consecutive hits within a short window stack a score multiplier; a miss resets it to 1x.</p></div>
 			</div>
 		</div>
+
 	</section>
 
 	<section>
 		<div class="section-head"><span class="section-num">07</span><h2>Presenting it as a mini YSWS</h2></div>
 		<div class="ysws-intro">
-			<p><b>YSWS</b> (You Ship, We Ship) is Hack Club's ship-something-get-something model. Here the trade is concrete: ship a ghost or Halloween-themed p5.js game, get candy. This meeting compresses the usual weeks-long YSWS loop into 90 minutes: the "ship" bar is a working link and a repo, not a finished product. The point is that everyone actually finishes and submits something real, not that it's polished.</p>
+			<p><b>YSWS</b> (You Ship, We Ship) is Hack Club's event model! In this case, if you were to create an awesome Halloween-themed p5.js game, you'd get candy(and extras??). This meeting compresses the usual weeks-long YSWS loop into a club form. The point is that everyone actually finishes and submits something real, not that it's polished.</p>
 		</div>
 		<div class="ysws-cols">
 			<div class="rule-card">
@@ -181,19 +183,19 @@
 			</details>
 			<details class="faq-item">
 				<summary>Can I use AI?</summary>
-				<p>For unblocking a single line, sure. Not for writing your upgrade. The point of the meeting is that you wrote the thing you're showing off.</p>
+				<p>For bug fixing after trying yourself, sure. Not for writing your upgrade. The point of the meeting is that you wrote the thing you're showing off.</p>
 			</details>
 			<details class="faq-item">
 				<summary>What if I don't finish?</summary>
-				<p>Ship what you've got. A working base game with zero upgrades still counts: the bar is a playable link, not a polished product.</p>
+				<p>Ship what you've got! A working base game with zero upgrades still counts: the bar is a playable link, not a polished product.</p>
 			</details>
 			<details class="faq-item">
 				<summary>Can I work with a partner?</summary>
-				<p>Talk through problems together, but write your own file. Two people submitting the same code both need to have actually built it.</p>
+				<p>You can talk through problems together, but write your own code. Two people submitting the same code is not considered two seperate projects.</p>
 			</details>
 			<details class="faq-item">
 				<summary>Is there a deadline?</summary>
-				<p>The end of the meeting. Submissions and candy happen live at the showcase, not after the fact.</p>
+				<p>You have until the end of your meeting! Or if you can't get it done in one meeting, you can have consecutive meetings to finish the game.</p>
 			</details>
 			<details class="faq-item">
 				<summary>Do I need to install anything?</summary>

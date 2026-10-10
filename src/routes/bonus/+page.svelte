@@ -11,14 +11,14 @@
 			title: 'Custom art & sound',
 			goal: 'Give your effects your own art, add your own sound effects, or both.',
 			hints: [
-				'Draw sprites or effects in a pixel art tool, export them as PNGs, and upload them to your sketch.',
-				'Record or generate your own sound effects, then play one when something happens, like catching a ghost.',
+				'Draw sprites or effects in a pixel art tool, export them as PNGs, and upload them to your sketch!',
+				'Record or find your own sound effects to use, then play one when something happens.',
 				'Browsers block sound until the player clicks, so start audio after the first click.',
 				'In the p5.js web editor, upload files from the sketch file list: click the arrow on the left, then + and Upload file.'
 			],
 			groups: [
 				{
-					label: 'p5.js reference',
+					label: 'p5.js references',
 					links: [
 						{ name: 'loadImage()', url: 'https://p5js.org/reference/p5/loadImage/' },
 						{ name: 'image()', url: 'https://p5js.org/reference/p5/image/' },
@@ -62,6 +62,7 @@
 						{ name: 'textFont()', url: 'https://p5js.org/reference/p5/textFont/' }
 					]
 				},
+
 				{
 					label: 'JavaScript basics',
 					links: [
@@ -79,10 +80,11 @@
 		{ name: 'p5.js tutorials', desc: 'Longer step-by-step lessons.', url: 'https://p5js.org/tutorials/' },
 		{ name: 'The Coding Train', desc: 'Video lessons on p5.js.', url: 'https://thecodingtrain.com/tracks/code-programming-with-p5-js' }
 	];
+
 </script>
 
 <svelte:head>
-	<title>Ghost Ship | Bonus</title>
+	<title>Ghost Ship | Bonus Challenges</title>
 </svelte:head>
 
 <div class="page">
@@ -92,12 +94,12 @@
 <main>
 	<header class="intro">
 		<h1>Bonus challenges</h1>
-		<p>Finished the base game? These challenges are on you, so there's no step-by-step code here, just the goal, a few hints, and the docs and tools you'll need for each one.</p>
+		<p>Finished the base game? These are some extra challenges, so there's no step-by-step guide here! Instead, use the docs and tools listed below. </p>
 	</header>
 
 	<div class="rewards">
 		<div class="reward"><i class="ph-bold ph-sticker"></i><StickerSheet /></div>
-		<div class="reward"><i class="ph-bold ph-gift"></i><span><b>Finish both:</b> the sticker sheet and $10 total for candy!</span></div>
+		<div class="reward"><i class="ph-bold ph-gift"></i><span><b>Finish both:</b> you'll get a sticker sheet and $10 for candy!</span></div>
 	</div>
 
 	{#each bonuses as bonus}

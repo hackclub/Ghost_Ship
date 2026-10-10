@@ -118,8 +118,8 @@
 <main>
 	<div class="hero">
 		<img src="/media/IMG_0398.png" alt="" />
-		<h1>Play the base game</h1>
-		<p>Click the ghost before time runs out. This is the same starter everyone at the meeting begins from.</p>
+		<h1>Play an example game</h1>
+		<p>Click the ghost before time runs out! This is the base game you'll be trying to make your own version of.</p>
 	</div>
 
 	<div class="cabinet">
