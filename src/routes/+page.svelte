@@ -34,6 +34,7 @@
 		<ul>
 			<li><i class="ph-bold ph-code"></i>Use p5.js(either in the web editor or in VS Code)!</li>
 			<li><i class="ph-bold ph-game-controller"></i>A full playable (and fun) game!</li>
+			<li><i class="ph-bold ph-plus-circle"></i>Start from the guide's game and add 2-3 unique features!</li>
 			<li><i class="ph-bold ph-ghost"></i>Halloween themed; think of some spooky creatures! OooOooo</li>
 			<li><i class="ph-bold ph-link"></i>Submit a playable link: eiither a p5.js web editor link, or GitHub Pages on your own.</li>
 		</ul>

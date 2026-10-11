@@ -308,7 +308,7 @@ function drawGhost(x, y) {
 
 	const features = [
 		{
-			title: 'Haunted wobble',
+			title: 'Small wobble',
 			desc: 'Make your creature shiver in place by nudging its position a tiny random amount every frame.',
 			docs: [ref('random')],
 			example: example('Random', 'Calculating-Values-Random')
@@ -320,13 +320,13 @@ function drawGhost(x, y) {
 			example: example('Bouncing ball', 'Classes-And-Objects-Shake-Ball-Bounce')
 		},
 		{
-			title: 'A second creature',
+			title: 'Another creature',
 			desc: 'Draw something new, like a pumpkin or a bat, out of arcs, triangles, and custom shapes, then use it as a bonus target or something to avoid.',
 			docs: [ref('arc'), ref('triangle'), ref('beginShape')],
 			example: example('Shape primitives', 'Shapes-And-Color-Shape-Primitives')
 		},
 		{
-			title: 'See-through ghost',
+			title: 'Transparent ghosts',
 			desc: 'Add a fourth number to fill() for transparency, then use sin() and map() to make your creature fade in and out.',
 			docs: [ref('fill'), ref('sin'), ref('map')],
 			example: example('Sine and cosine', 'Angles-And-Motion-Sine-Cosine')
@@ -485,11 +485,11 @@ function drawGhost(x, y) {
 
 	<section class="step" id="what">
 		<h2><span class="num">2</span>What is p5.js?</h2>
-		<p>p5.js is a JavaScript library for drawing and animating in the browser. You get a <b>canvas</b>, a rectangle of pixels, and simple functions like <code>ellipse()</code> and <code>rect()</code> to draw on it.</p>
+		<p>p5.js is a JavaScript library that can be used for drawing and animating in the browser. You get a <b>canvas</b>, a rectangle of pixels, and simple functions like <code>ellipse()</code> and <code>rect()</code> to draw on it.</p>
 		<p>Every p5.js sketch has two special functions:</p>
 		<ul>
 			<li><code>setup()</code> runs <b>once</b> when the sketch starts, so it's where you make the canvas.</li>
-			<li><code>draw()</code> runs <b>again and again</b>, about 60 times a second, and each run is one frame, like a page in a flipbook.</li>
+			<li><code>draw()</code> runs <b>again and again</b>, about 60 times a second, and each run is one frame, like a page one of those flipbook animations.</li>
 		</ul>
 		<p>The p5.js web editor starts you with this code, and in VS Code you can paste it into <code>sketch.js</code>:</p>
 		{@render withPreview(setupCode, previews.starter, '')}
@@ -498,7 +498,6 @@ function drawGhost(x, y) {
 			<li><code>createCanvas(400, 400)</code> makes a drawing area 400 pixels wide and 400 pixels tall, and it's in <code>setup()</code> because you only need one canvas.</li>
 			<li><code>background(220)</code> paints the whole canvas one color, and with a single number that color is a shade of gray from <code>0</code> (black) to <code>255</code> (white), so <code>220</code> is light gray. It's in <code>draw()</code> so every frame starts from a clean canvas.</li>
 		</ul>
-		<div class="note"><i class="ph-bold ph-play"></i><span>Press ▶ Play in the web editor, or save in VS Code with Live Server running, and you'll see a light gray square: that's your game screen.</span></div>
 		<div class="callout">
 			<h3>How positions work</h3>
 			<p>Every point on the canvas is an <b>(x, y)</b> pair, starting from <code>(0, 0)</code> in the <b>top-left</b> corner, with <b>x</b> growing to the right and <b>y</b> growing <b>downward</b>. On a 400 × 400 canvas the middle is <code>(200, 200)</code>, and inside your sketch <code>width</code> and <code>height</code> hold those sizes for you.</p>
@@ -507,8 +506,8 @@ function drawGhost(x, y) {
 
 	<section class="step" id="draw">
 		<h2><span class="num">3</span>Draw shapes</h2>
-		<p>First, set up the game screen: change the canvas to <code>createCanvas(480, 360)</code> (wider, like a game) and the background to <code>background(15, 10, 25)</code> (dark purple, for a spooky night), since the rest of the guide uses these values.</p>
-		<p>Drawing in p5.js works like painting: you pick a color, then draw a shape with it, and shapes drawn later go on top.</p>
+		<p>First, set up the screen that will display your game. Change the canvas to <code>createCanvas(480, 360)</code> (wider so it has a better aspect ratio) and the background to <code>background(15, 10, 25)</code> (dark purple), since the rest of the guide uses these values.</p>
+		<p>Drawing in p5.js works kinda like a painting! You pick a color, then draw a shape with it, and shapes drawn later go on top.</p>
 		<ul>
 			<li><code>background(r, g, b)</code> fills the whole canvas, so calling it at the start of <code>draw()</code> wipes the last frame.</li>
 			<li><code>fill(r, g, b)</code> sets the color for the next shapes, with each number from 0-255 for red, green, and blue.</li>
@@ -517,7 +516,7 @@ function drawGhost(x, y) {
 			<li><code>rect(x, y, w, h)</code> draws a rectangle from its top-left corner.</li>
 		</ul>
 		{@render withPreview(shapesCode, previews.shapes, '')}
-		<div class="note"><i class="ph-bold ph-lightbulb"></i><span><b>Try it:</b> move the moon by changing <code>400, 60</code>, or change the fill numbers to make a blood-red moon.</span></div>
+		<p>Try moving the moon by changing <code>400, 60</code>, or make it blood red by changing the fill numbers.</p>
 	</section>
 
 	<section class="step" id="ghost">
@@ -525,20 +524,20 @@ function drawGhost(x, y) {
 		<p>Now make a drawing of your own and put it inside a <b>function</b> with <code>x</code> and <code>y</code> parameters, so you can draw it anywhere, as many times as you want, with one line.</p>
 		<p>Every shape inside uses <code>x</code> and <code>y</code> as its starting point, so the eyes move with the body.</p>
 		{@render withPreview(ghostCode, previews.creature, 'zoomed in on the top-left')}
-		<div class="note"><i class="ph-bold ph-paint-brush"></i><span><b>Your turn:</b> make it yours by adding a mouth with another <code>ellipse()</code>, giving it a hat with <code>rect()</code>, or changing its color. Keep the body about 60 pixels wide, since the click check later expects that.</span></div>
+		<p>Now make it yours: add a mouth with another <code>ellipse()</code>, a hat with <code>rect()</code>, or a new color. Just keep the body about 60 pixels wide so clicks still work later.</p>
 	</section>
 
 	<section class="step" id="move">
 		<h2><span class="num">5</span>Make it move randomly</h2>
 		<p><code>random(a, b)</code> gives you a different number between <code>a</code> and <code>b</code> every time you call it, which is the key to anything unpredictable.</p>
 		<p>First, store the ghost's position in a <b>variable</b> so it can change between frames. <code>{'{ x: 240, y: 180 }'}</code> is an <b>object</b>, which lets one variable hold both numbers.</p>
-		<h3>Option A: haunted drift</h3>
+		<h3>Option A: Drifting</h3>
 		<p>Nudge the ghost a random amount every frame so it shivers and wanders around like it's possessed.</p>
 		{@render withPreview(wobbleCode, previews.drift, '')}
-		<h3>Option B: teleport</h3>
+		<h3>Option B: Teleport</h3>
 		<p>This is what Ghost Hunt does: every 60 frames (about one second), the ghost jumps to a random spot. <code>frameCount</code> counts frames since the start, and <code>%</code> gives the remainder of a division, so <code>frameCount % 60 === 0</code> is true once every 60 frames.</p>
 		{@render withPreview(spawnCode, previews.teleport, '')}
-		<div class="note"><i class="ph-bold ph-lightbulb"></i><span>The <code>40</code> and <code>width - 40</code> keep the ghost from spawning half off the edge, and your <code>drawGhost()</code> function from step 4 stays at the bottom of the file.</span></div>
+		<p>The <code>40</code> and <code>width - 40</code> keep the ghost from spawning half off the edge, and <code>drawGhost()</code> from step 4 stays at the bottom of your file.</p>
 	</section>
 
 	<section class="step" id="click">
@@ -546,7 +545,7 @@ function drawGhost(x, y) {
 		<p>p5.js calls <code>mousePressed()</code> every time you click, and <code>mouseX</code> and <code>mouseY</code> hold where the click happened.</p>
 		<p><code>dist()</code> measures the distance between two points. Since the ghost is 60 pixels wide, its radius is 30, so any click closer than 30 pixels to its center is a hit, and an <code>if</code> statement runs code only when that's true.</p>
 		{@render withPreview(clickCode, previews.click, 'click the ghost')}
-		<div class="note"><i class="ph-bold ph-cursor-click"></i><span><b>Try it:</b> click the ghost a few times and watch the score go up as the ghost jumps somewhere new.</span></div>
+		<p>Click the ghost a few times, and the score goes up as it jumps somewhere new.</p>
 	</section>
 
 	<section class="step" id="timer">
@@ -557,15 +556,10 @@ function drawGhost(x, y) {
 
 	<section class="step" id="together">
 		<h2><span class="num">8</span>Put it together</h2>
-		<p>One last idea: a <code>state</code> variable decides what the screen shows: <code>'start'</code> shows a title, <code>'play'</code> runs the game, and <code>'over'</code> shows your score, with a click moving between them.</p>
+		<p>One last concept: a <code>state</code> variable decides what the screen shows: <code>'start'</code> shows a title, <code>'play'</code> runs the game, and <code>'over'</code> shows your score, with a click moving between them.</p>
 		<p>Here's the complete game, piece by piece. Clear the editor, then copy each piece in, top to bottom:</p>
 		{@render withPreview(finalCode, previews.full, 'click to play')}
-		<div class="done">
-			<i class="ph-bold ph-ghost"></i>
-			<div>
-				<b>That's Ghost Hunt</b>, with a start screen, clicking to score, a countdown, game over, and retry. It's exactly the game on the <a href="/play/">Play page</a>, so now make it yours.
-			</div>
-		</div>
+		<p>And that's Ghost Hunt! Just like the <a href="/play/">demo game here</a>.</p>
 	</section>
 
 	<section class="step" id="unique">
@@ -580,7 +574,7 @@ function drawGhost(x, y) {
 			<article class="idea">
 				<i class="ph-bold ph-palette"></i>
 				<h3>Your own colors</h3>
-				<p>Pick a palette and stick to it: toxic swamp green, blood-red moon, candy-corn orange, or icy blue, then change every <code>fill()</code> and <code>background()</code> to match.</p>
+				<p>Pick your own color palette! A toxic swamp green, blood-red moon, candy-corn orange, or icy blue, then change every <code>fill()</code> and <code>background()</code> to match.</p>
 			</article>
 			<article class="idea">
 				<i class="ph-bold ph-text-aa"></i>
@@ -605,7 +599,7 @@ function drawGhost(x, y) {
 		</div>
 
 		<h3 class="features-title">Features to add</h3>
-		<p>Here are some additional features you can add! There's no code to copy here: each one points you to the p5.js docs and an example you can open, play with, and figure out for your own game. Want to see them all in action? Try the <a href="/demo/">expanded demo</a>, or pick apart the <a href="https://p5js.org/examples/Games-Circle-Clicker/" target="_blank" rel="noopener">Circle Clicker</a> example.</p>
+		<p>Here are some additional features, and <b>you have to add 2-3 of them</b> to your game! There's no code to copy from here, you'll be given a link to the relevant p5js documentation and an example you can open, play with, and figure out for your own game. Want to see them all in action? Try the <a href="/demo/">expanded demo</a>, or pick apart the <a href="https://p5js.org/examples/Games-Circle-Clicker/" target="_blank" rel="noopener">Circle Clicker</a> example.</p>
 		<div class="tools">
 			{#each features as feature}
 				<article class="tool">
@@ -661,6 +655,7 @@ function drawGhost(x, y) {
 		<h2><span class="num">11</span>Checklist &amp; submit</h2>
 		<ul class="checks">
 			<li><i class="ph-bold ph-check-square"></i>It's made with p5.js and is a full playable game</li>
+			<li><i class="ph-bold ph-check-square"></i>It starts from the guide's game, with 2-3 unique features you added from step 9</li>
 			<li><i class="ph-bold ph-check-square"></i>It has a start screen, gameplay, and a game-over screen</li>
 			<li><i class="ph-bold ph-check-square"></i>It's Halloween themed, with your own spooky creatures</li>
 			<li><i class="ph-bold ph-check-square"></i>It looks like your own game, not a copy of the guide</li>
@@ -692,7 +687,7 @@ function drawGhost(x, y) {
 					<li>Open your link in a new tab to check that the game loads and plays.</li>
 					<li>Paste the link into your club's submission form, or send it to your club leader.</li>
 				</ol>
-				<div class="note"><i class="ph-bold ph-lightbulb"></i><span>Built your game in VS Code instead? Switch to <b>Submitting as an individual</b>, follow the VS Code steps to put it on GitHub Pages, and give your club leader that link.</span></div>
+				<p>Built your game in VS Code instead? Switch to <b>Submitting as an individual</b>, follow the VS Code steps to put it on GitHub Pages, and give your club leader that link.</p>
 			</div>
 		{:else}
 			<div class="panel" role="tabpanel">
@@ -706,7 +701,7 @@ function drawGhost(x, y) {
 						<li>Click <b>uploading an existing file</b>, drag in everything from the unzipped folder (<code>index.html</code>, <code>sketch.js</code>, and the rest), and click <b>Commit changes</b>.</li>
 						{@render pagesSteps()}
 					</ol>
-					<div class="note"><i class="ph-bold ph-lightbulb"></i><span>Changed something? Download it again and upload the new files to your repo, and your live link will update about a minute later.</span></div>
+					<p>Changed something? Download it again and upload the new files to your repo, and your live link will update about a minute later.</p>
 				{:else}
 					<ol class="howto">
 						<li>In VS Code, open <b>Source Control</b> (<code>Ctrl+Shift+G</code>) and click <b>Initialize Repository</b>.</li>
@@ -714,7 +709,7 @@ function drawGhost(x, y) {
 						<li>Click <b>Publish Branch</b>, sign in to GitHub, and pick <b>Publish to GitHub public repository</b>, and VS Code will make the repo and upload your code.</li>
 						{@render pagesSteps()}
 					</ol>
-					<div class="note"><i class="ph-bold ph-lightbulb"></i><span>Changed something? <b>Commit</b>, then click <b>Sync Changes</b>, and your live link will update about a minute later. Keep <code>index.html</code> in the top of your folder, not in a subfolder, or Pages shows a 404 page.</span></div>
+					<p>Changed something? <b>Commit</b>, then click <b>Sync Changes</b>, and your live link will update about a minute later. Keep <code>index.html</code> in the top of your folder, not in a subfolder, or Pages shows a 404 page.</p>
 				{/if}
 				<div class="cta">
 					<a class="btn primary" href={SUBMIT_URL} target="_blank" rel="noopener"><i class="ph-bold ph-rocket-launch"></i>Submit your game</a>

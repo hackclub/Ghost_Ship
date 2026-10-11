@@ -22,6 +22,7 @@
 		<h2><i class="ph-bold ph-check-circle"></i>Your game must</h2>
 		<ul>
 			<li>Be made with only p5.js!</li>
+			<li>Start from the game in the <a href="/tutorial/">guide</a> and add 2-3 unique features of your own (step 9 of the guide has ideas).</li>
 			<li>Be playable through a demo link.</li>
 			<li>Be Halloween themed, with your own monster(s).</li>
 			<li>Look like your own, not a copy of the guide, with your own creature design, colors, and style (the <a href="/tutorial/">guide</a> has ideas).</li>
@@ -31,7 +32,7 @@
 
 	<section class="block bonus">
 		<h2><i class="ph-bold ph-star"></i>Bonus challenges</h2>
-		<p class="sub">While these are optional challenges, if you complete them you can get extra prizes!</p>
+		<p class="sub">Once your base game is done, want more? While these are optional challenges, if you complete one or both you can get extra prizes!</p>
 		<div class="bonus-grid">
 			<article class="bonus-card">
 				<h3><i class="ph-bold ph-paint-brush"></i>Custom art &amp; sound</h3>
