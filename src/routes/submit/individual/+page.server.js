@@ -49,6 +49,17 @@ const isUrl = (s) => {
 	}
 };
 
+const isGithubPagesUrl = (s) => {
+	try {
+		const u = new URL(s);
+		if (u.protocol !== 'https:') return false;
+		const host = u.hostname.toLowerCase();
+		return host === 'github.io' || host.endsWith('.github.io');
+	} catch {
+		return false;
+	}
+};
+
 const TEXT_FIELDS = [
 	'firstName', 'lastName', 'birthday', 'githubUsername',
 	'address1', 'address2', 'city', 'state', 'zip', 'country',
@@ -89,7 +100,7 @@ export const actions = {
 			if (!values[key]) return invalid(msg);
 		}
 		if (!isUrl(values.repoUrl) || !values.repoUrl.includes('github.com/')) return invalid('Repo link must be a https://github.com/... link.');
-		if (!isUrl(values.pagesUrl) || !values.pagesUrl.includes('.github.io')) return invalid('Pages link must be a https://....github.io link.');
+		if (!isGithubPagesUrl(values.pagesUrl)) return invalid('Pages link must be a https://....github.io link.');
 		if (!(screenshot instanceof File) || screenshot.size === 0) return invalid('Add a screenshot of your game.');
 		if (!screenshot.type.startsWith('image/')) return invalid('The screenshot must be an image.');
 		if (screenshot.size > MAX_SCREENSHOT) return invalid('The screenshot must be under 5 MB.');
