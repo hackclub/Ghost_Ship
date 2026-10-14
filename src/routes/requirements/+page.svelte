@@ -36,7 +36,7 @@
 		<div class="bonus-grid">
 			<article class="bonus-card">
 				<h3><i class="ph-bold ph-paint-brush"></i>Custom art &amp; sound</h3>
-				<p>Give your effects your own art, add your own sound effects, or both, like a burst you drew for when a ghost is caught or a "boo" you recorded yourself.</p>
+				<p>Give your effects your own art, add your own sound effects, or both, like a burst you drew for when a ghost is caught or a "boo!" you recorded yourself.</p>
 			</article>
 			<article class="bonus-card">
 				<h3><i class="ph-bold ph-stairs"></i>Two more levels</h3>

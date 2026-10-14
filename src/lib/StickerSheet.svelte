@@ -5,7 +5,7 @@
 	const close = () => dialog.close();
 </script>
 
-<span><b>Finish 1 bonus:</b> <button type="button" class="link" onclick={open}>this sticker sheet</button></span>
+<span><b>Finish 1 bonus:</b> <button type="button" class="link" onclick={open}>this sticker sheet</button>!</span>
 <button type="button" class="thumb" onclick={open} aria-label="View the sticker sheet">
 	<img src="/media/stickersheet-web.jpg" alt="" loading="lazy" />
 </button>

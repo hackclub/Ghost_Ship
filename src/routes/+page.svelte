@@ -36,7 +36,7 @@
 			<li><i class="ph-bold ph-game-controller"></i>A full playable (and fun) game!</li>
 			<li><i class="ph-bold ph-plus-circle"></i>Start from the guide's game and add 2-3 unique features!</li>
 			<li><i class="ph-bold ph-ghost"></i>Halloween themed; think of some spooky creatures! OooOooo</li>
-			<li><i class="ph-bold ph-link"></i>Put your game on GitHub Pages and submit that link (everyone, workshop or solo).</li>
+			<li><i class="ph-bold ph-link"></i>Put your game on GitHub Pages and submit that link (everybody has to!!!)</li>
 		</ul>
 		<a class="btn primary" href="/requirements/"><i class="ph-bold ph-list-checks"></i>Full requirements</a>
 	</section>

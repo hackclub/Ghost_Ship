@@ -357,13 +357,13 @@ function drawGhost(x, y) {
 	</div>
 {/snippet}
 
-{#snippet toolTabs()}
+{#snippet toolTabs(byEditor = false)}
 	<div class="tabs" role="tablist">
 		<button type="button" role="tab" aria-selected={tool === 'lapse'} class:active={tool === 'lapse'} onclick={() => (tool = 'lapse')}>
-			<i class="ph-bold ph-video-camera"></i>Lapse + web editor
+			{#if byEditor}<i class="ph-bold ph-browser"></i>p5.js web editor{:else}<i class="ph-bold ph-video-camera"></i>Lapse + web editor{/if}
 		</button>
 		<button type="button" role="tab" aria-selected={tool === 'vscode'} class:active={tool === 'vscode'} onclick={() => (tool = 'vscode')}>
-			<i class="ph-bold ph-code"></i>VS Code + Hackatime
+			<i class="ph-bold ph-code"></i>{byEditor ? 'VS Code' : 'VS Code + Hackatime'}
 		</button>
 	</div>
 {/snippet}
@@ -376,7 +376,7 @@ function drawGhost(x, y) {
 
 {#snippet pagesSteps()}
 	<li>On github.com, open your repo and go to <b>Settings → Pages</b>. Under <b>Build and deployment</b>, set <b>Source</b> to <b>Deploy from a branch</b>, pick <b>main</b> and <b>/ (root)</b>, and click <b>Save</b>.</li>
-	<li>Wait about a minute and refresh, and your game's link will appear at the top of that page, like <code>https://your-name.github.io/your-repo/</code>. Open it to make sure the game plays.</li>
+	<li>Wait about a minute and refresh, and your game's link will appear at the top of that page, like <code>https://your-name.github.io/your-repo/</code>. Open it and the game should play. If you have any problems, feel free to ask for help in the Slack or at workshops!</li>
 {/snippet}
 
 {#snippet webEditor()}
@@ -475,7 +475,7 @@ function drawGhost(x, y) {
 				<p><a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">Hackatime</a> tracks your time in code editors like VS Code.</p>
 				<ol class="howto">
 					<li>Install <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code</a>.</li>
-					<li>Go to <a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">hackatime.hackclub.com</a>, sign in, and follow its setup steps, which connect VS Code to your account so your time is logged while you code.</li>
+					<li>Go to <a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">hackatime.hackclub.com</a>, sign in, and follow its setup steps, which connect VS Code to your account so your time is logged while you code. Struggling? Check out this <a href="https://www.youtube.com/watch?v=grriwsX5mIo" target="_blank" rel="noopener">setup guide</a>.</li>
 					<li>Make a folder and open it in VS Code with <b>File → Open Folder</b>.</li>
 					<li>Make a file called <code>index.html</code> in the folder and paste this in, which loads p5.js and your game:
 						{@render code(indexCode)}
@@ -490,11 +490,11 @@ function drawGhost(x, y) {
 
 	<section class="step" id="what">
 		<h2><span class="num">2</span>What is p5.js?</h2>
-		<p>p5.js is a JavaScript library that can be used for drawing and animating in the browser. You get a <b>canvas</b>, a rectangle of pixels, and simple functions like <code>ellipse()</code> and <code>rect()</code> to draw on it.</p>
+		<p>p5.js is a JavaScript library that can be used for drawing and animating in the browser. You get a canvas, a rectangle of pixels, and simple functions like <code>ellipse()</code> and <code>rect()</code> to draw on it.</p>
 		<p>Every p5.js sketch has two special functions:</p>
 		<ul>
-			<li><code>setup()</code> runs <b>once</b> when the sketch starts, so it's where you make the canvas.</li>
-			<li><code>draw()</code> runs <b>again and again</b>, about 60 times a second, and each run is one frame, like a page one of those flipbook animations.</li>
+			<li><code>setup()</code> runs once when the sketch starts, so it's where you make the canvas.</li>
+			<li><code>draw()</code> runs again and again, about 60 times a second, and each run is one frame, like a page one of those flipbook animations.</li>
 		</ul>
 		<p>The p5.js web editor starts you with this code, and in VS Code you can paste it into <code>sketch.js</code>:</p>
 		{@render withPreview(setupCode, previews.starter, '')}
@@ -535,7 +535,7 @@ function drawGhost(x, y) {
 	<section class="step" id="move">
 		<h2><span class="num">5</span>Make it move randomly</h2>
 		<p><code>random(a, b)</code> gives you a different number between <code>a</code> and <code>b</code> every time you call it, which is the key to anything unpredictable.</p>
-		<p>First, store the ghost's position in a <b>variable</b> so it can change between frames. <code>{'{ x: 240, y: 180 }'}</code> is an <b>object</b>, which lets one variable hold both numbers.</p>
+		<p>First, store the ghost's position in a variable so it can change between frames. <code>{'{ x: 240, y: 180 }'}</code> is an object, which lets one variable hold both numbers.</p>
 		<h3>Option A: Drifting</h3>
 		<p>Nudge the ghost a random amount every frame so it shivers and wanders around like it's possessed.</p>
 		{@render withPreview(wobbleCode, previews.drift, '')}
@@ -561,7 +561,7 @@ function drawGhost(x, y) {
 
 	<section class="step" id="together">
 		<h2><span class="num">8</span>Put it together</h2>
-		<p>One last concept: a <code>state</code> variable decides what the screen shows: <code>'start'</code> shows a title, <code>'play'</code> runs the game, and <code>'over'</code> shows your score, with a click moving between them.</p>
+		<p>A <code>state</code> variable decides what the screen shows: <code>'start'</code> shows a title, <code>'play'</code> runs the game, and <code>'over'</code> shows your score, with a click moving between them.</p>
 		<p>Here's the complete game, piece by piece. Clear the editor, then copy each piece in, top to bottom:</p>
 		{@render withPreview(finalCode, previews.full, 'click to play')}
 		<p>And that's Ghost Hunt! Just like the <a href="/play/">demo game here</a>.</p>
@@ -574,27 +574,27 @@ function drawGhost(x, y) {
 			<article class="idea">
 				<i class="ph-bold ph-skull"></i>
 				<h3>Your own enemies</h3>
-				<p>Swap the ghost for a bat, a skeleton, a witch, an eyeball, or something you made up, built from <code>ellipse()</code>, <code>rect()</code>, <code>triangle()</code>, and <code>arc()</code>, and try mixing 2-3 different ones.</p>
+				<p>Swap the ghost for another spooky creature! A bat, skeleton, eyeball, anything that's scary works.</p>
 			</article>
 			<article class="idea">
 				<i class="ph-bold ph-palette"></i>
 				<h3>Your own colors</h3>
-				<p>Pick your own color palette! A toxic swamp green, blood-red moon, candy-corn orange, or icy blue, then change every <code>fill()</code> and <code>background()</code> to match.</p>
+				<p>Pick your own unique color scheme! Whether that's an icy cold wasteland or a blood-red moon, use <code>background()</code> for the sky, <code>fill()</code> for the inside of shapes and text, and <code>stroke()</code> for outlines.</p>
 			</article>
 			<article class="idea">
 				<i class="ph-bold ph-text-aa"></i>
 				<h3>Your own font</h3>
-				<p>Use <code>textFont('Georgia')</code> or another font, plus <code>textStyle(BOLD)</code> and a bigger <code>textSize()</code> for your title.</p>
+				<p>The base game uses p5's default font. Search up another one from this <a href="https://www.w3schools.com/cssref/css_websafe_fonts.php" target="_blank" rel="noopener">list of web-safe fonts</a> and change it with <code>textFont()</code>, like <code>textFont('Georgia')</code>.</p>
 			</article>
 			<article class="idea">
 				<i class="ph-bold ph-tree"></i>
 				<h3>Your own scene</h3>
-				<p>Draw a graveyard with tombstones, a haunted house, a full moon, stars, or fog instead of a plain background.</p>
+				<p>Draw a graveyard with tombstones, a haunted house, a full moon, stars, or fog instead of a plain background. Build it out of simple shapes in <code>draw()</code>, right after <code>background()</code>: a big <code>ellipse()</code> for the moon, a <code>rect()</code> with an <code>arc()</code> on top for each tombstone, tiny ellipses for stars. Draw your scene before the ghost so the ghost stays on top.</p>
 			</article>
 			<article class="idea">
 				<i class="ph-bold ph-book-open-text"></i>
 				<h3>Your own story</h3>
-				<p>Give it a name and a reason to click, like catching bats before sunrise, feeding candy to a monster, or zapping zombies off your lawn, and put it on the start screen.</p>
+				<p>Give it a name and a reason to click, like catching bats before sunrise, feeding candy to a monster, or zapping zombies off your lawn, and put it on the start screen. Then try to tie your creatures, colors, and scene into that story.</p>
 			</article>
 			<article class="idea">
 				<i class="ph-bold ph-sliders"></i>
@@ -604,7 +604,7 @@ function drawGhost(x, y) {
 		</div>
 
 		<h3 class="features-title">Features to add</h3>
-		<p>Here are some additional features, and <b>you have to add 2-3 of them</b> to your game! There's no code to copy from here, you'll be given a link to the relevant p5js documentation and an example you can open, play with, and figure out for your own game. Want to see them all in action? Try the <a href="/demo/">expanded demo</a>, or pick apart the <a href="https://p5js.org/examples/Games-Circle-Clicker/" target="_blank" rel="noopener">Circle Clicker</a> example.</p>
+		<p>Here are some example features you can add! There's no code to copy from here, you'll be given a link to the relevant p5js documentation and an example you can open, play with, and figure out for your own game. Check out this <a href="/demo/">expanded demo</a> or <a href="https://p5js.org/examples/Games-Circle-Clicker/" target="_blank" rel="noopener">Circle Clicker</a> for how you might implement it yourself.</p>
 		<div class="tools">
 			{#each features as feature}
 				<article class="tool">
@@ -627,11 +627,11 @@ function drawGhost(x, y) {
 
 	<section class="step" id="extra">
 		<h2><span class="num">10</span>Already done?</h2>
-		<p>Your base game works? Try these extra things to get a <b>sticker sheet</b> and <b>more money for candy</b>!</p>
+		<p>Your base game works? Try these extra things to get a sticker sheet and more money for candy!</p>
 		<div class="bonus-grid">
 			<article class="bonus-card">
 				<div class="tool-head"><h3><i class="ph-bold ph-paint-brush"></i>Bonus 1: Custom art &amp; sound</h3></div>
-				<p>Give your effects your own art, add your own sound effects, or both, like a burst you drew for when a ghost is caught or a "boo" you recorded yourself.</p>
+				<p>Give your effects your own art, add your own sound effects, or both, like a burst you drew for when a ghost is caught or a "boo!" you recorded yourself.</p>
 			</article>
 			<article class="bonus-card">
 				<div class="tool-head"><h3><i class="ph-bold ph-stairs"></i>Bonus 2: Two more levels</h3></div>
@@ -664,7 +664,7 @@ function drawGhost(x, y) {
 			<li><i class="ph-bold ph-check-square"></i>It has a start screen, gameplay, and a game-over screen</li>
 			<li><i class="ph-bold ph-check-square"></i>It's Halloween themed, with your own spooky creatures</li>
 			<li><i class="ph-bold ph-check-square"></i>It looks like your own game, not a copy of the guide</li>
-			<li><i class="ph-bold ph-check-square"></i>You wrote it yourself, using AI only to unblock a single line</li>
+			<li><i class="ph-bold ph-check-square"></i>You made it yourself! Not copying from AI</li>
 		</ul>
 		<div class="cta">
 			<a class="btn ghost" href="/requirements/"><i class="ph-bold ph-list-checks"></i>Read the full requirements before submitting</a>
@@ -680,29 +680,28 @@ function drawGhost(x, y) {
 
 		{#if track === 'workshop'}
 			<div class="panel" role="tabpanel">
-				<p>Everyone puts their finished game on GitHub Pages, workshops included, so it's a real website anyone can play. Both are free. For example, this is what my project, Bat Catcher, looks like:</p>
+				<p>Here's my example final project I made from the guide, Bat Catcher!</p>
 				<video class="demo-video" src="/media/demo.mp4" controls muted loop playsinline preload="metadata"></video>
 				<ol class="howto shots">
 					<li>
 						Make sure you're logged in, then open the <b>File</b> menu and click <b>Save</b> (or press <code>Ctrl+S</code>).
 						<img src="/media/save.png" alt="The p5.js editor File menu open, with Save near the top and Share greyed out" />
-						<span class="caption">This is where you save your project. Share and Download stay greyed out until you save.</span>
+						<span class="caption">This is where you'll save your project, and Share/Download will stay greyed out until you save it.</span>
 					</li>
 				</ol>
 				<p>Next, put it on GitHub Pages. First, make a free account on <a href="https://github.com/" target="_blank" rel="noopener">github.com</a>.</p>
 				<ol class="howto">
 					{@render editorUploadSteps()}
 					{@render pagesSteps()}
-					<li>Paste your repo link and your Pages link into your club's submission form, or send them to your club leader.</li>
+					<li>Paste your repository and Pages link into the submission form your club leader gives you.</li>
 				</ol>
 				<p>Changed something? Download it again and upload the new files to your repo, and your live link will update about a minute later.</p>
-				<p>Built your game in VS Code instead? Switch to <b>Submitting as an individual</b>, follow the VS Code steps, and give your club leader those links.</p>
 			</div>
 		{:else}
 			<div class="panel" role="tabpanel">
-				<p>Everyone puts their finished game on GitHub Pages, even if you built it in the web editor with Lapse: you put your code on GitHub and turn it into a live website, so anyone can play it from a link. Both are free, and the steps depend on where you built your game:</p>
+				<p>Regardless of whether you tracked your time with Hackatime or Lapse, you must have a GitHub Pages site that shows off your game!</p>
 				<p>First, make a free account on <a href="https://github.com/" target="_blank" rel="noopener">github.com</a>.</p>
-				{@render toolTabs()}
+				{@render toolTabs(true)}
 				{#if tool === 'lapse'}
 					<ol class="howto">
 						{@render editorUploadSteps()}
@@ -1176,7 +1175,7 @@ function drawGhost(x, y) {
 		display: flex;
 		gap: 8px;
 		flex-wrap: wrap;
-		margin: 16px 0 0;
+		margin: 16px 0 20px;
 	}
 	.tabs button {
 		display: inline-flex;
