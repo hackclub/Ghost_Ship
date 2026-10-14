@@ -22,7 +22,7 @@
 		<a class="choice" href={SUBMIT_URL} target="_blank" rel="noopener">
 			<i class="ph-bold ph-user"></i>
 			<h2>Individual</h2>
-			<p>You built your game on your own, you have to have tracked your time with hackatime!</p>
+			<p>You built your game on your own. You'll sign in with <b>Hack Club Auth</b> and <b>Hackatime</b>, then pick the Hackatime project for your game. Used Lapse? Paste the link to every timelapse instead.</p>
 			<span class="go">Individual form<i class="ph-bold ph-arrow-right"></i></span>
 		</a>
 		<a class="choice" href={WORKSHOP_SUBMIT_URL} target="_blank" rel="noopener">

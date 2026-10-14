@@ -467,10 +467,19 @@ function drawGhost(x, y) {
 			</div>
 		{:else}
 			<div class="panel" role="tabpanel">
+				<div class="callout">
+					<h3>Make your accounts first</h3>
+					<p>When you press <b>Submit</b>, you'll sign in with these, and the form only opens if your accounts check out:</p>
+					<ul>
+						<li><a href="https://auth.hackclub.com" target="_blank" rel="noopener">Hack Club Auth</a>: verify your identity here. You need to be verified and YSWS eligible to submit.</li>
+						<li><a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">Hackatime</a>: if you used VS Code, the form lists your Hackatime projects so you can pick the one for your game.</li>
+						<li><a href="https://lapse.hackclub.com" target="_blank" rel="noopener">Lapse</a>: only if you record your time with Lapse instead of VS Code.</li>
+					</ul>
+				</div>
 				<p>On your own, your coding time has to be tracked, so pick one of these two ways:</p>
 				{@render toolTabs()}
 				{#if tool === 'lapse'}
-				<p>Record your time with <a href="https://lapse.hackclub.com" target="_blank" rel="noopener">lapse.hackclub.com</a>, and build in the p5.js web editor, the same way as a workshop. Questions about Lapse? Ask in <a href="https://hackclub.enterprise.slack.com/archives/C0AJ1FK8E8Z" target="_blank" rel="noopener">#lapse</a> in the <a href="https://slack.hackclub.com/" target="_blank" rel="noopener">Hack Club Slack</a>.</p>
+				<p>Record your time with <a href="https://lapse.hackclub.com" target="_blank" rel="noopener">lapse.hackclub.com</a>, and build in the p5.js web editor, the same way as a workshop. Keep the link to every timelapse you record, since you'll paste all of them into the form when you submit. Questions about Lapse? Ask in <a href="https://hackclub.enterprise.slack.com/archives/C0AJ1FK8E8Z" target="_blank" rel="noopener">#lapse</a> in the <a href="https://slack.hackclub.com/" target="_blank" rel="noopener">Hack Club Slack</a>.</p>
 				{@render webEditor()}
 				{:else}
 				<p><a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">Hackatime</a> tracks your time in code editors like VS Code.</p>
@@ -708,9 +717,10 @@ function drawGhost(x, y) {
 				{@render toolTabs(true)}
 				{#if tool === 'lapse'}
 					<ol class="howto">
+						<li>Copy the link to every timelapse you recorded in <a href="https://lapse.hackclub.com" target="_blank" rel="noopener">Lapse</a>.</li>
 						{@render editorUploadSteps()}
 						{@render pagesSteps()}
-						<li>Submit your repo link and your Pages link with the button below.</li>
+						<li>Press the button below, sign in with Hack Club Auth and Hackatime, paste all your timelapse links, and submit your repo link and your Pages link.</li>
 					</ol>
 					<p>Changed something? Download it again and upload the new files to your repo, and your live link will update about a minute later.</p>
 				{:else}
@@ -719,7 +729,7 @@ function drawGhost(x, y) {
 						<li>Type a message like <code>first version</code> and click <b>Commit</b>, and if it asks to stage your changes, click <b>Yes</b>.</li>
 						<li>Click <b>Publish Branch</b>, sign in to GitHub, and pick <b>Publish to GitHub public repository</b>, and VS Code will make the repo and upload your code.</li>
 						{@render pagesSteps()}
-						<li>Submit your repo link and your Pages link with the button below.</li>
+						<li>Press the button below, sign in with Hack Club Auth and Hackatime, pick your Hackatime project, and submit your repo link and your Pages link.</li>
 					</ol>
 					<p>Changed something? <b>Commit</b>, then click <b>Sync Changes</b>, and your live link will update about a minute later. Keep <code>index.html</code> in the top of your folder, not in a subfolder, or Pages shows a 404 page.</p>
 				{/if}
@@ -1003,6 +1013,13 @@ function drawGhost(x, y) {
 	}
 	.callout p {
 		margin: 0;
+	}
+	.callout ul {
+		margin: 8px 0 0;
+		padding-left: 20px;
+	}
+	.callout li + li {
+		margin-top: 6px;
 	}
 
 	.tools {
