@@ -25,7 +25,7 @@
 		},
 		{
 			q: 'Do I need to install anything?',
-			a: 'Nope, everything runs in the <a href="https://editor.p5js.org/" target="_blank" rel="noopener">p5.js Web Editor</a> in your browser.'
+			a: 'Nope, everything runs in the <a href="https://editor.p5js.org/" target="_blank" rel="noopener">p5.js Web Editor</a> in your browser. You will need a free <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> account to put your finished game on GitHub Pages, which everyone does to submit.'
 		},
 		{
 			q: 'Can I use AI?',

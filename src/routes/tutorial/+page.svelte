@@ -368,10 +368,15 @@ function drawGhost(x, y) {
 	</div>
 {/snippet}
 
+{#snippet editorUploadSteps()}
+	<li>In the p5.js editor, click <b>File → Save</b> first, since Download stays greyed out until you save, then click <b>File → Download</b> and unzip the file.</li>
+	<li>On github.com, click <b>+ → New repository</b>, give it a name, make it <b>Public</b>, and click <b>Create repository</b>.</li>
+	<li>Click <b>uploading an existing file</b>, drag in everything from the unzipped folder (<code>index.html</code>, <code>sketch.js</code>, and the rest), and click <b>Commit changes</b>.</li>
+{/snippet}
+
 {#snippet pagesSteps()}
 	<li>On github.com, open your repo and go to <b>Settings → Pages</b>. Under <b>Build and deployment</b>, set <b>Source</b> to <b>Deploy from a branch</b>, pick <b>main</b> and <b>/ (root)</b>, and click <b>Save</b>.</li>
 	<li>Wait about a minute and refresh, and your game's link will appear at the top of that page, like <code>https://your-name.github.io/your-repo/</code>. Open it to make sure the game plays.</li>
-	<li>Submit your repo link and your Pages link with the button below.</li>
 {/snippet}
 
 {#snippet webEditor()}
@@ -675,7 +680,7 @@ function drawGhost(x, y) {
 
 		{#if track === 'workshop'}
 			<div class="panel" role="tabpanel">
-				<p>Once your game is finished in the p5.js web editor, here's how to share it. For example, this is what my project, Bat Catcher, looks like:</p>
+				<p>Everyone puts their finished game on GitHub Pages, workshops included, so it's a real website anyone can play. Both are free. For example, this is what my project, Bat Catcher, looks like:</p>
 				<video class="demo-video" src="/media/demo.mp4" controls muted loop playsinline preload="metadata"></video>
 				<ol class="howto shots">
 					<li>
@@ -683,23 +688,26 @@ function drawGhost(x, y) {
 						<img src="/media/save.png" alt="The p5.js editor File menu open, with Save near the top and Share greyed out" />
 						<span class="caption">This is where you save your project. Share and Download stay greyed out until you save.</span>
 					</li>
-					<li>After you save, the link in your browser's address bar changes to your sketch's own link, and that's the link you share. For example, Bat Catcher got saved as <a href="https://editor.p5js.org/ckacha/sketches/KYHFeDnq-" target="_blank" rel="noopener"><code>editor.p5js.org/ckacha/sketches/KYHFeDnq-</code></a>, which shows the code and lets anyone press ▶ to play.</li>
-					<li>Open your link in a new tab to check that the game loads and plays.</li>
-					<li>Paste the link into your club's submission form, or send it to your club leader.</li>
 				</ol>
-				<p>Built your game in VS Code instead? Switch to <b>Submitting as an individual</b>, follow the VS Code steps to put it on GitHub Pages, and give your club leader that link.</p>
+				<p>Next, put it on GitHub Pages. First, make a free account on <a href="https://github.com/" target="_blank" rel="noopener">github.com</a>.</p>
+				<ol class="howto">
+					{@render editorUploadSteps()}
+					{@render pagesSteps()}
+					<li>Paste your repo link and your Pages link into your club's submission form, or send them to your club leader.</li>
+				</ol>
+				<p>Changed something? Download it again and upload the new files to your repo, and your live link will update about a minute later.</p>
+				<p>Built your game in VS Code instead? Switch to <b>Submitting as an individual</b>, follow the VS Code steps, and give your club leader those links.</p>
 			</div>
 		{:else}
 			<div class="panel" role="tabpanel">
-				<p>On your own, you share your game by putting your code on GitHub and turning it into a live website with GitHub Pages, so anyone can play it from a link. Both are free, and the steps depend on where you built your game:</p>
+				<p>Everyone puts their finished game on GitHub Pages, even if you built it in the web editor with Lapse: you put your code on GitHub and turn it into a live website, so anyone can play it from a link. Both are free, and the steps depend on where you built your game:</p>
 				<p>First, make a free account on <a href="https://github.com/" target="_blank" rel="noopener">github.com</a>.</p>
 				{@render toolTabs()}
 				{#if tool === 'lapse'}
 					<ol class="howto">
-						<li>In the p5.js editor, click <b>File → Save</b> first, since Download stays greyed out until you save, then click <b>File → Download</b> and unzip the file.</li>
-						<li>On github.com, click <b>+ → New repository</b>, give it a name, make it <b>Public</b>, and click <b>Create repository</b>.</li>
-						<li>Click <b>uploading an existing file</b>, drag in everything from the unzipped folder (<code>index.html</code>, <code>sketch.js</code>, and the rest), and click <b>Commit changes</b>.</li>
+						{@render editorUploadSteps()}
 						{@render pagesSteps()}
+						<li>Submit your repo link and your Pages link with the button below.</li>
 					</ol>
 					<p>Changed something? Download it again and upload the new files to your repo, and your live link will update about a minute later.</p>
 				{:else}
@@ -708,6 +716,7 @@ function drawGhost(x, y) {
 						<li>Type a message like <code>first version</code> and click <b>Commit</b>, and if it asks to stage your changes, click <b>Yes</b>.</li>
 						<li>Click <b>Publish Branch</b>, sign in to GitHub, and pick <b>Publish to GitHub public repository</b>, and VS Code will make the repo and upload your code.</li>
 						{@render pagesSteps()}
+						<li>Submit your repo link and your Pages link with the button below.</li>
 					</ol>
 					<p>Changed something? <b>Commit</b>, then click <b>Sync Changes</b>, and your live link will update about a minute later. Keep <code>index.html</code> in the top of your folder, not in a subfolder, or Pages shows a 404 page.</p>
 				{/if}

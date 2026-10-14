@@ -23,7 +23,7 @@
 		<ul>
 			<li>Be made with only p5.js!</li>
 			<li>Start from the game in the <a href="/tutorial/">guide</a> and add 2-3 unique features of your own (step 9 of the guide has ideas).</li>
-			<li>Be playable through a demo link.</li>
+			<li>Be live on GitHub Pages from a public GitHub repo, and you submit both links. This is for everyone, workshop or individual, even if you built it in the p5.js web editor or with Lapse (step 10 of the <a href="/tutorial/">guide</a> shows how).</li>
 			<li>Be Halloween themed, with your own monster(s).</li>
 			<li>Look like your own, not a copy of the guide, with your own creature design, colors, and style (the <a href="/tutorial/">guide</a> has ideas).</li>
 			<li>Individual submission? Track your time with <a href="https://hackatime.hackclub.com" target="_blank" rel="noopener">Hackatime</a> or <a href="https://lapse.hackclub.com" target="_blank" rel="noopener">Lapse</a>.</li>
