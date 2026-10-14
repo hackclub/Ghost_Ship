@@ -6,6 +6,7 @@
 
 	const v = $derived(form?.values ?? {});
 	let tool = $state('hackatime');
+	let sending = $state(false);
 	$effect(() => {
 		if (form?.values?.tool) tool = form.values.tool;
 	});
@@ -78,7 +79,15 @@
 <SiteHeader current="submit" />
 
 <main>
-	{#if blocked}
+	{#if form?.success}
+		<header class="intro">
+			<h1>Submitted!</h1>
+			<p>Your game is in. We'll review it and reach out on Slack or email. Happy haunting!</p>
+		</header>
+		<div class="cta">
+			<a class="btn primary" href="/"><i class="ph-bold ph-house"></i>Back home</a>
+		</div>
+	{:else if blocked}
 		<header class="intro">
 			<h1>{blocked.title}</h1>
 			<p>{blocked.body}</p>
@@ -93,14 +102,6 @@
 			{/if}
 			<form method="POST" action="/auth/logout"><button class="btn ghost"><i class="ph-bold ph-sign-out"></i>Sign out</button></form>
 		</div>
-	{:else if form?.success}
-		<header class="intro">
-			<h1>Submitted!</h1>
-			<p>Your game is in. We'll review it and reach out on Slack or email. Happy haunting!</p>
-		</header>
-		<div class="cta">
-			<a class="btn primary" href="/"><i class="ph-bold ph-house"></i>Back home</a>
-		</div>
 	{:else}
 		<header class="intro">
 			<h1>Submit your game</h1>
@@ -113,7 +114,7 @@
 			<p class="error" role="alert"><i class="ph-bold ph-warning"></i>{form.error}</p>
 		{/if}
 
-		<form method="POST" class="card" enctype="multipart/form-data">
+		<form method="POST" class="card" enctype="multipart/form-data" onsubmit={(e) => { if (sending) e.preventDefault(); sending = true; }}>
 			<h2>Your game</h2>
 			<label>
 				<span>Code URL</span>
@@ -263,7 +264,7 @@
 			</label>
 
 			<div class="cta">
-				<button class="btn primary"><i class="ph-bold ph-rocket-launch"></i>Submit</button>
+				<button class="btn primary" disabled={sending}><i class="ph-bold ph-rocket-launch"></i>{sending ? 'Submitting...' : 'Submit'}</button>
 			</div>
 		</form>
 		<form method="POST" action="/auth/logout" class="signout"><button class="link">Not you? Sign out</button></form>
