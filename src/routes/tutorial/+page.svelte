@@ -719,12 +719,14 @@ function drawGhost(x, y) {
 					<ol class="howto">
 						<li>Copy the link to every timelapse you recorded in <a href="https://lapse.hackclub.com" target="_blank" rel="noopener">Lapse</a>.</li>
 						{@render editorUploadSteps()}
+						<li>Add a README: in your repo, click <b>Add file → Create new file</b>, name it exactly <code>README.md</code>, write what your game is and how to play it, and click <b>Commit changes</b>. You can't submit without it.</li>
 						{@render pagesSteps()}
 						<li>Press the button below, sign in with Hack Club Auth and Hackatime, paste all your timelapse links, and submit your repo link and your Pages link.</li>
 					</ol>
 					<p>Changed something? Download it again and upload the new files to your repo, and your live link will update about a minute later.</p>
 				{:else}
 					<ol class="howto">
+						<li>Add a README: make a file called exactly <code>README.md</code> in the top of your folder, next to <code>index.html</code>, and write what your game is and how to play it. You can't submit without it.</li>
 						<li>In VS Code, open <b>Source Control</b> (<code>Ctrl+Shift+G</code>) and click <b>Initialize Repository</b>.</li>
 						<li>Type a message like <code>first version</code> and click <b>Commit</b>, and if it asks to stage your changes, click <b>Yes</b>.</li>
 						<li>Click <b>Publish Branch</b>, sign in to GitHub, and pick <b>Publish to GitHub public repository</b>, and VS Code will make the repo and upload your code.</li>

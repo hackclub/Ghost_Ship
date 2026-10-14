@@ -1,6 +1,7 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { eligibility, getMe, getProjects, isBanned } from '$lib/server/hackatime.js';
 import { createSubmission, hasSubmitted, uploadAttachment } from '$lib/server/airtable.js';
+import { checkRepo } from '$lib/server/github.js';
 import { SESSION_COOKIE, unseal } from '$lib/server/session.js';
 
 export const prerender = false;
@@ -90,6 +91,13 @@ export const actions = {
 		}
 		if (!isUrl(values.repoUrl) || !values.repoUrl.includes('github.com/')) return invalid('Repo link must be a https://github.com/... link.');
 		if (!isUrl(values.pagesUrl) || !values.pagesUrl.includes('.github.io')) return invalid('Pages link must be a https://....github.io link.');
+		try {
+			const repoProblem = await checkRepo(values.repoUrl);
+			if (repoProblem) return invalid(repoProblem);
+		} catch (e) {
+			console.error(e);
+			return invalid('We couldn\'t reach GitHub to check your repository. Try again in a minute.');
+		}
 		if (!(screenshot instanceof File) || screenshot.size === 0) return invalid('Add a screenshot of your game.');
 		if (!screenshot.type.startsWith('image/')) return invalid('The screenshot must be an image.');
 		if (screenshot.size > MAX_SCREENSHOT) return invalid('The screenshot must be under 5 MB.');
