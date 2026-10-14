@@ -15,7 +15,7 @@
 <main>
 	<header class="intro">
 		<h1>Submit your game here!</h1>
-		<p>Check the <a href="/requirements/">requirements</a> first, then pick the form that matches how you built your game.</p>
+		<p>Check the <a href="/requirements/">requirements</a> first, then pick the form that matches how you built your game. Want to run a workshop at your club? Go to <a href={WORKSHOP_SUBMIT_URL} target="_blank" rel="noopener">clubs.hackclub.com/workshops</a>.</p>
 	</header>
 
 	<div class="choices">
@@ -28,7 +28,7 @@
 		<a class="choice" href={WORKSHOP_SUBMIT_URL} target="_blank" rel="noopener">
 			<i class="ph-bold ph-users-three"></i>
 			<h2>Workshop</h2>
-			<p>You built your game at a club meeting. Paste your repository and Pages link into the submission form your club leader gives you.</p>
+			<p>You built your game at a club meeting. Club workshops submit at <b>clubs.hackclub.com/workshops</b>: paste your repository and Pages link there.</p>
 			<span class="go">Workshop form<i class="ph-bold ph-arrow-right"></i></span>
 		</a>
 	</div>

@@ -21,7 +21,7 @@
 		},
 		{
 			q: 'Do I need a club to take part?',
-			a: "Nope! Build it on your own and send it in as an <a href=\"/submit/\">individual submission</a>, or <a href=\"https://clubs.hackclub.com/\" target=\"_blank\" rel=\"noopener\">run a workshop</a> at your club. Don't have one? <a href=\"https://apply.hackclub.com/\" target=\"_blank\" rel=\"noopener\">Apply here</a>."
+			a: "Nope! Build it on your own and send it in as an <a href=\"/submit/\">individual submission</a>, or <a href=\"https://clubs.hackclub.com/workshops\" target=\"_blank\" rel=\"noopener\">run a workshop</a> at your club. Don't have one? <a href=\"https://apply.hackclub.com/\" target=\"_blank\" rel=\"noopener\">Apply here</a>."
 		},
 		{
 			q: 'Do I need to install anything?',

@@ -23,7 +23,7 @@
 			<div class="cta">
 				<a class="btn primary" href="/tutorial/"><i class="ph-bold ph-book-open"></i>Guide</a>
 				<a class="btn ghost" href={SUBMIT_URL} target="_blank" rel="noopener"><i class="ph-bold ph-rocket-launch"></i>Individual Submissions</a>
-				<a class="btn ghost" href="https://clubs.hackclub.com/" target="_blank" rel="noopener"><i class="ph-bold ph-users-three"></i>Run a Workshop</a>
+				<a class="btn ghost" href="https://clubs.hackclub.com/workshops" target="_blank" rel="noopener"><i class="ph-bold ph-users-three"></i>Run a Workshop</a>
 			</div>
 			<p class="sponsor">Sponsored by Jared</p>
 		</div>

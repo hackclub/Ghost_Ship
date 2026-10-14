@@ -2,7 +2,7 @@
 	import SiteHeader from '$lib/SiteHeader.svelte';
 	import SiteFooter from '$lib/SiteFooter.svelte';
 	import StickerSheet from '$lib/StickerSheet.svelte';
-	import { SUBMIT_URL } from '$lib/links.js';
+	import { SUBMIT_URL, WORKSHOP_SUBMIT_URL } from '$lib/links.js';
 	import Preview from '$lib/Preview.svelte';
 	import { onMount } from 'svelte';
 	import * as previews from '$lib/previews.js';
@@ -461,6 +461,7 @@ function drawGhost(x, y) {
 
 		{#if track === 'workshop'}
 			<div class="panel" role="tabpanel">
+				<p>Want to run a workshop at your club? Go to <a href={WORKSHOP_SUBMIT_URL} target="_blank" rel="noopener">clubs.hackclub.com/workshops</a>.</p>
 				<p>At a club workshop, you build everything in the free p5.js web editor, so there's nothing to install.</p>
 				{@render webEditor()}
 			</div>
@@ -693,9 +694,12 @@ function drawGhost(x, y) {
 				<ol class="howto">
 					{@render editorUploadSteps()}
 					{@render pagesSteps()}
-					<li>Paste your repository and Pages link into the submission form your club leader gives you.</li>
+					<li>Club workshops submit at <a href={WORKSHOP_SUBMIT_URL} target="_blank" rel="noopener">clubs.hackclub.com/workshops</a>: paste your repository and Pages link there.</li>
 				</ol>
 				<p>Changed something? Download it again and upload the new files to your repo, and your live link will update about a minute later.</p>
+				<div class="cta">
+					<a class="btn primary" href={WORKSHOP_SUBMIT_URL} target="_blank" rel="noopener"><i class="ph-bold ph-rocket-launch"></i>Submit your workshop game</a>
+				</div>
 			</div>
 		{:else}
 			<div class="panel" role="tabpanel">
