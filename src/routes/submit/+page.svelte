@@ -1,7 +1,7 @@
 <script>
 	import SiteHeader from '$lib/SiteHeader.svelte';
 	import SiteFooter from '$lib/SiteFooter.svelte';
-	import { SUBMIT_URL, WORKSHOP_SUBMIT_URL } from '$lib/links.js';
+	import { SUBMISSIONS_OPEN, SUBMIT_URL, WORKSHOP_SUBMIT_URL } from '$lib/links.js';
 </script>
 
 <svelte:head>
@@ -14,17 +14,27 @@
 
 <main>
 	<header class="intro">
-		<h1>Submit your game here!</h1>
+		<h1>{SUBMISSIONS_OPEN ? 'Submit your game here!' : 'Submissions are closed'}</h1>
+		{#if !SUBMISSIONS_OPEN}<p class="closed">Ghost Ship has ended, so the individual form is no longer taking submissions. Thanks to everyone who built a game!</p>{/if}
 		<p>Check the <a href="/requirements/">requirements</a> first, then pick the form that matches how you built your game. Want to run a workshop at your club? Go to <a href={WORKSHOP_SUBMIT_URL} target="_blank" rel="noopener">clubs.hackclub.com/workshops</a>.</p>
 	</header>
 
 	<div class="choices">
+		{#if SUBMISSIONS_OPEN}
 		<a class="choice" href={SUBMIT_URL} target="_blank" rel="noopener">
 			<i class="ph-bold ph-user"></i>
 			<h2>Individual</h2>
 			<p>You built your game on your own. You'll sign in with <b>Hack Club Auth</b> and <b>Hackatime</b>, then pick the Hackatime project for your game. Used Lapse? Paste the link to every timelapse instead.</p>
 			<span class="go">Individual form<i class="ph-bold ph-arrow-right"></i></span>
 		</a>
+		{:else}
+		<div class="choice off">
+			<i class="ph-bold ph-user"></i>
+			<h2>Individual</h2>
+			<p>The individual form is closed because the event has ended.</p>
+			<span class="go">Closed<i class="ph-bold ph-lock"></i></span>
+		</div>
+		{/if}
 		<a class="choice" href={WORKSHOP_SUBMIT_URL} target="_blank" rel="noopener">
 			<i class="ph-bold ph-users-three"></i>
 			<h2>Workshop</h2>
@@ -105,7 +115,17 @@
 		text-decoration: none;
 		transition: border-color 0.15s;
 	}
-	.choice:hover {
+	.closed {
+		color: var(--pumpkin) !important;
+		margin-bottom: 12px !important;
+	}
+	.off {
+		opacity: 0.55;
+	}
+	.off .go {
+		color: var(--parchment-dim);
+	}
+	.choice:not(.off):hover {
 		border-color: var(--pumpkin);
 	}
 	.choice > i {

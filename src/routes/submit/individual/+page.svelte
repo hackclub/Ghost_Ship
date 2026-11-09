@@ -12,6 +12,10 @@
 	});
 
 	const blockedText = {
+		closed: {
+			title: 'Submissions are closed',
+			body: 'Ghost Ship has ended, so the form is no longer taking submissions. Thanks to everyone who built a game!'
+		},
 		denied: {
 			title: 'Sign-in cancelled',
 			body: 'You need to sign in with Hackatime to submit. Press the button to try again.'
@@ -93,14 +97,16 @@
 			<p>{blocked.body}</p>
 		</header>
 		<div class="cta">
-			{#if data.blocked === 'denied'}
+			{#if data.blocked === 'closed'}
+				<a class="btn primary" href="/"><i class="ph-bold ph-house"></i>Back home</a>
+			{:else if data.blocked === 'denied'}
 				<a class="btn primary" href="/auth/hackatime/login"><i class="ph-bold ph-sign-in"></i>Sign in with Hackatime</a>
 			{:else if data.blocked === 'already_submitted'}
 				<a class="btn primary" href="/"><i class="ph-bold ph-house"></i>Back home</a>
 			{:else if data.blocked !== 'banned' && data.blocked !== 'verified_but_over_18'}
 				<a class="btn primary" href="https://auth.hackclub.com" target="_blank" rel="noopener"><i class="ph-bold ph-identification-card"></i>Open Hack Club Auth</a>
 			{/if}
-			<form method="POST" action="/auth/logout"><button class="btn ghost"><i class="ph-bold ph-sign-out"></i>Sign out</button></form>
+			{#if data.blocked !== 'closed'}<form method="POST" action="/auth/logout"><button class="btn ghost"><i class="ph-bold ph-sign-out"></i>Sign out</button></form>{/if}
 		</div>
 	{:else}
 		<header class="intro">

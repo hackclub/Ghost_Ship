@@ -3,6 +3,7 @@ import { eligibility, getMe, getProjects, isBanned } from '$lib/server/hackatime
 import { createSubmission, hasSubmitted, uploadAttachment } from '$lib/server/airtable.js';
 import { checkRepo } from '$lib/server/github.js';
 import { SESSION_COOKIE, unseal } from '$lib/server/session.js';
+import { SUBMISSIONS_OPEN } from '$lib/links.js';
 
 export const prerender = false;
 
@@ -32,6 +33,7 @@ async function account(cookies, url) {
 }
 
 export async function load({ cookies, url }) {
+	if (!SUBMISSIONS_OPEN) return { blocked: 'closed' };
 	const { me, blocked, projects } = await account(cookies, url);
 	if (blocked) return { blocked };
 	return {
@@ -75,6 +77,7 @@ const REQUIRED = {
 
 export const actions = {
 	default: async ({ cookies, request, url }) => {
+		if (!SUBMISSIONS_OPEN) return fail(403, { error: 'Submissions are closed.' });
 		const { me, blocked, projects } = await account(cookies, url);
 		if (blocked) return fail(403, { error: 'Your account can\'t submit right now. Reload the page to see why.' });
 
