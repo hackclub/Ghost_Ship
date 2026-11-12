@@ -31,7 +31,7 @@
 		<div class="choice off">
 			<i class="ph-bold ph-user"></i>
 			<h2>Individual</h2>
-			<p>The individual form is closed because the event has ended.</p>
+			<p>The individual form is closed because the event has ended. Sponsored by Jared, run by CK. Look out for more events soon!</p>
 			<span class="go">Closed<i class="ph-bold ph-lock"></i></span>
 		</div>
 		{/if}

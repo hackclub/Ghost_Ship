@@ -25,7 +25,7 @@
 				<a class="btn ghost" href={SUBMIT_URL} target="_blank" rel="noopener"><i class="ph-bold ph-rocket-launch"></i>Individual Submissions</a>
 				<a class="btn ghost" href="https://clubs.hackclub.com/workshops" target="_blank" rel="noopener"><i class="ph-bold ph-users-three"></i>Run a Workshop</a>
 			</div>
-			<p class="sponsor">Sponsored by Jared</p>
+			<p class="sponsor">Run by CK<br />Sponsored by Jared</p>
 		</div>
 	</section>
 
